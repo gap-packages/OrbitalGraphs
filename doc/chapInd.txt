@@ -1,0 +1,17 @@
+  
+  
+  [1XIndex[101X
+  
+  [10XIsAbsolutelyOGR[110X, for IsPermGroup 1.3-3 
+  [2XIsAbsolutelyOrbitalGraphRecognisable[102X, for IsPermGroup 1.3-3 
+  [10XIsOGR[110X, for IsPermGroup 1.3-1 
+  [2XIsOrbitalGraphRecognisable[102X, for IsPermGroup 1.3-1 
+  [10XIsStronglyOGR[110X, for IsPermGroup 1.3-2 
+  [2XIsStronglyOrbitalGraphRecognisable[102X, for IsPermGroup 1.3-2 
+  [2XOrbitalClosure[102X, for IsPermGroup 1.2-1 
+  [2XOrbitalGraphs[102X, for IsPermGroup 1.1-1 
+      for IsTransformationSemigroup 1.1-1 
+  [2XOrbitalIndex[102X, for IsPermGroup 1.2-2 
+  
+  
+  -------------------------------------------------------

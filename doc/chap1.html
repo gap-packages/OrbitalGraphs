@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (OrbitalGraphs) - Chapter 1: Orbital graphs</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7A71E14A79B5FC58" name="X7A71E14A79B5FC58"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7A71E14A79B5FC58">1 <span class="Heading">Orbital graphs</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X79EBDA1784A05642">1.1 <span class="Heading">Constructing orbital graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7FF24D7C830B2263">1.1-1 OrbitalGraphs</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7DF05F2780578D15">1.2 <span class="Heading">Values computed from orbital graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C1B2C0B8759F01E">1.2-1 OrbitalClosure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X795C58737FC89BC4">1.2-2 OrbitalIndex</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7B52F935828DE815">1.3 <span class="Heading">Recognising a group from its orbital graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X876D5EE881BF0F18">1.3-1 IsOrbitalGraphRecognisable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X818CAD8B7FB0E5C1">1.3-2 IsStronglyOrbitalGraphRecognisable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X859A8A0E8142983F">1.3-3 IsAbsolutelyOrbitalGraphRecognisable</a></span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Orbital graphs</span></h3>
+
+<p><a id="X79EBDA1784A05642" name="X79EBDA1784A05642"></a></p>
+
+<h4>1.1 <span class="Heading">Constructing orbital graphs</span></h4>
+
+<p><a id="X7FF24D7C830B2263" name="X7FF24D7C830B2263"></a></p>
+
+<h5>1.1-1 OrbitalGraphs</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitalGraphs</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitalGraphs</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A list of digraphs</p>
+
+<p>This attribute is an immutable list of all orbital graphs of the permutation group <var class="Arg">G</var> or transformation semigroup <var class="Arg">S</var>.</p>
+
+<p>The order of the returned list is not specified.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalGraphs(DihedralGroup(IsPermGroup, 8));</span>
+[ &lt;immutable digraph with 4 vertices, 4 edges&gt;, 
+  &lt;immutable digraph with 4 vertices, 8 edges&gt; ]
+</pre></div>
+
+<p><a id="X7DF05F2780578D15" name="X7DF05F2780578D15"></a></p>
+
+<h4>1.2 <span class="Heading">Values computed from orbital graphs</span></h4>
+
+<p><a id="X7C1B2C0B8759F01E" name="X7C1B2C0B8759F01E"></a></p>
+
+<h5>1.2-1 OrbitalClosure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitalClosure</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A permutation group</p>
+
+<p>The <em>orbital closure</em> of a nontrivial permutation group <var class="Arg">G</var> is the intersection of the automorphism groups of all orbital graphs of the group. See <code class="func">OrbitalGraphs</code> (<a href="chap1.html#X7FF24D7C830B2263"><span class="RefLink">1.1-1</span></a>). A trivial permutation group is defined to be its own orbital closure.</p>
+
+<p>For a transitive permutation group, <code class="func">OrbitalClosure</code> returns the same as the <strong class="pkg">GAP</strong> function <code class="func">TwoClosure</code> (<a href="../../../doc/ref/chap43_mj.html#X7A2D046B83DD5F5F"><span class="RefLink">Ref 43.12-3</span></a>) (which only applies to transitive groups).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalClosure(PSL(2,5)) = SymmetricGroup(6);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C6 := CyclicGroup(IsPermGroup, 6);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalClosure(C6) = C6;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A4_6 := Action(AlternatingGroup(4), Combinations([1..4], 2), OnSets);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">closure := OrbitalClosure(A4_6);</span>
+Group([ (3,4), (2,5), (1,2,3)(4,6,5) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsConjugate(SymmetricGroup(6),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               closure, WreathProduct(Group([(1,2)]), Group([(1,2,3)])));</span>
+true
+</pre></div>
+
+<p><a id="X795C58737FC89BC4" name="X795C58737FC89BC4"></a></p>
+
+<h5>1.2-2 OrbitalIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitalIndex</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A positive integer</p>
+
+<p>The <em>orbital index</em> of a permutation group is its <code class="func">Index</code> (<a href="../../../doc/ref/chap39_mj.html#X842AD37E79CE953E"><span class="RefLink">Ref 39.3-2</span></a>) in its <code class="func">OrbitalClosure</code> (<a href="chap1.html#X7C1B2C0B8759F01E"><span class="RefLink">1.2-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalIndex(PSL(2,5));</span>
+12
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalIndex(PGL(2,5));</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalIndex(AlternatingGroup(6));</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitalIndex(DihedralGroup(IsPermGroup, 6));</span>
+1
+</pre></div>
+
+<p><a id="X7B52F935828DE815" name="X7B52F935828DE815"></a></p>
+
+<h4>1.3 <span class="Heading">Recognising a group from its orbital graphs</span></h4>
+
+<p><a id="X876D5EE881BF0F18" name="X876D5EE881BF0F18"></a></p>
+
+<h5>1.3-1 IsOrbitalGraphRecognisable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOrbitalGraphRecognisable</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>A permutation group is <em>orbital graph recognisable</em> if and only if it is equal to its <code class="func">OrbitalClosure</code> (<a href="chap1.html#X7C1B2C0B8759F01E"><span class="RefLink">1.2-1</span></a>), i.e. if and only if its <code class="func">OrbitalIndex</code> (<a href="chap1.html#X795C58737FC89BC4"><span class="RefLink">1.2-2</span></a>) is <code class="code">1</code>.</p>
+
+<p><code class="code">IsOGR</code> is a synonym for <code class="func">IsOrbitalGraphRecognisable</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOrbitalGraphRecognisable(QuaternionGroup(IsPermGroup, 8));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOGR(AlternatingGroup(8));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOGR(TrivialGroup(IsPermGroup));</span>
+true
+</pre></div>
+
+<p><a id="X818CAD8B7FB0E5C1" name="X818CAD8B7FB0E5C1"></a></p>
+
+<h5>1.3-2 IsStronglyOrbitalGraphRecognisable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStronglyOrbitalGraphRecognisable</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>The nontrivial permutation group <var class="Arg">G</var> is <em>strongly orbital graph recognisable (strongly OGR)</em> if and only if there exists <em>some</em> orbital graph of <var class="Arg">G</var> whose automorphism group is <var class="Arg">G</var>. The trivial permutation group is defined to be strongly OGR.</p>
+
+<p>Note that every strongly OGR group is also orbital graph recognisable, see <code class="func">IsOrbitalGraphRecognisable</code> (<a href="chap1.html#X876D5EE881BF0F18"><span class="RefLink">1.3-1</span></a>).</p>
+
+<p><code class="code">IsStronglyOGR</code> is a synonym for <code class="func">IsStronglyOrbitalGraphRecognisable</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStronglyOrbitalGraphRecognisable(CyclicGroup(IsPermGroup, 8));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStronglyOGR(QuaternionGroup(IsPermGroup, 8));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStronglyOGR(TrivialGroup(IsPermGroup));</span>
+true
+</pre></div>
+
+<p><a id="X859A8A0E8142983F" name="X859A8A0E8142983F"></a></p>
+
+<h5>1.3-3 IsAbsolutelyOrbitalGraphRecognisable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAbsolutelyOrbitalGraphRecognisable</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>The permutation group <var class="Arg">G</var> is <em>absolutely orbital graph recognisable (absolutely OGR)</em> if and only if <em>every</em> orbital graph of <var class="Arg">G</var> has automorphism group equal to <var class="Arg">G</var>.</p>
+
+<p>Note that every absolutely OGR group is also strongly orbital graph recognisable, see <code class="func">IsStronglyOrbitalGraphRecognisable</code> (<a href="chap1.html#X818CAD8B7FB0E5C1"><span class="RefLink">1.3-2</span></a>).</p>
+
+<p><code class="code">IsAsolutelyOGR</code> is a synonym for <code class="func">IsAbsolutelyOrbitalGraphRecognisable</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAbsolutelyOrbitalGraphRecognisable(DihedralGroup(IsPermGroup, 8));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAbsolutelyOGR(CyclicGroup(IsPermGroup, 8));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAbsolutelyOGR(TrivialGroup(IsPermGroup));</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,143 @@
+  
+  [1X1 [33X[0;0YOrbital graphs[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YConstructing orbital graphs[133X[101X
+  
+  [1X1.1-1 OrbitalGraphs[101X
+  
+  [33X[1;0Y[29X[2XOrbitalGraphs[102X( [3XG[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XOrbitalGraphs[102X( [3XS[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA list of digraphs[133X
+  
+  [33X[0;0YThis attribute is an immutable list of all orbital graphs of the permutation
+  group [3XG[103X or transformation semigroup [3XS[103X.[133X
+  
+  [33X[0;0YThe order of the returned list is not specified.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrbitalGraphs(DihedralGroup(IsPermGroup, 8));[127X[104X
+    [4X[28X[ <immutable digraph with 4 vertices, 4 edges>, [128X[104X
+    [4X[28X  <immutable digraph with 4 vertices, 8 edges> ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.2 [33X[0;0YValues computed from orbital graphs[133X[101X
+  
+  [1X1.2-1 OrbitalClosure[101X
+  
+  [33X[1;0Y[29X[2XOrbitalClosure[102X( [3XG[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA permutation group[133X
+  
+  [33X[0;0YThe  [13Xorbital closure[113X of a nontrivial permutation group [3XG[103X is the intersection
+  of  the  automorphism  groups  of  all  orbital  graphs  of  the  group. See
+  [2XOrbitalGraphs[102X  ([14X1.1-1[114X). A trivial permutation group is defined to be its own
+  orbital closure.[133X
+  
+  [33X[0;0YFor  a  transitive permutation group, [2XOrbitalClosure[102X returns the same as the
+  [5XGAP[105X  function  [2XTwoClosure[102X  ([14XReference:  TwoClosure[114X)  (which  only applies to
+  transitive groups).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrbitalClosure(PSL(2,5)) = SymmetricGroup(6);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XC6 := CyclicGroup(IsPermGroup, 6);;[127X[104X
+    [4X[25Xgap>[125X [27XOrbitalClosure(C6) = C6;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XA4_6 := Action(AlternatingGroup(4), Combinations([1..4], 2), OnSets);;[127X[104X
+    [4X[25Xgap>[125X [27Xclosure := OrbitalClosure(A4_6);[127X[104X
+    [4X[28XGroup([ (3,4), (2,5), (1,2,3)(4,6,5) ])[128X[104X
+    [4X[25Xgap>[125X [27XIsConjugate(SymmetricGroup(6),[127X[104X
+    [4X[25X>[125X [27X               closure, WreathProduct(Group([(1,2)]), Group([(1,2,3)])));[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-2 OrbitalIndex[101X
+  
+  [33X[1;0Y[29X[2XOrbitalIndex[102X( [3XG[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA positive integer[133X
+  
+  [33X[0;0YThe  [13Xorbital index[113X of a permutation group is its [2XIndex[102X ([14XReference: Index for
+  a group and its subgroup[114X) in its [2XOrbitalClosure[102X ([14X1.2-1[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XOrbitalIndex(PSL(2,5));[127X[104X
+    [4X[28X12[128X[104X
+    [4X[25Xgap>[125X [27XOrbitalIndex(PGL(2,5));[127X[104X
+    [4X[28X6[128X[104X
+    [4X[25Xgap>[125X [27XOrbitalIndex(AlternatingGroup(6));[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XOrbitalIndex(DihedralGroup(IsPermGroup, 6));[127X[104X
+    [4X[28X1[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.3 [33X[0;0YRecognising a group from its orbital graphs[133X[101X
+  
+  [1X1.3-1 IsOrbitalGraphRecognisable[101X
+  
+  [33X[1;0Y[29X[2XIsOrbitalGraphRecognisable[102X( [3XG[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YA permutation group is [13Xorbital graph recognisable[113X if and only if it is equal
+  to  its [2XOrbitalClosure[102X ([14X1.2-1[114X), i.e. if and only if its [2XOrbitalIndex[102X ([14X1.2-2[114X)
+  is [10X1[110X.[133X
+  
+  [33X[0;0Y[10XIsOGR[110X is a synonym for [2XIsOrbitalGraphRecognisable[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XIsOrbitalGraphRecognisable(QuaternionGroup(IsPermGroup, 8));[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsOGR(AlternatingGroup(8));[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsOGR(TrivialGroup(IsPermGroup));[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X1.3-2 IsStronglyOrbitalGraphRecognisable[101X
+  
+  [33X[1;0Y[29X[2XIsStronglyOrbitalGraphRecognisable[102X( [3XG[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YThe  nontrivial  permutation  group [3XG[103X is [13Xstrongly orbital graph recognisable
+  (strongly  OGR)[113X  if  and  only if there exists [13Xsome[113X orbital graph of [3XG[103X whose
+  automorphism  group  is  [3XG[103X.  The  trivial permutation group is defined to be
+  strongly OGR.[133X
+  
+  [33X[0;0YNote  that  every strongly OGR group is also orbital graph recognisable, see
+  [2XIsOrbitalGraphRecognisable[102X ([14X1.3-1[114X).[133X
+  
+  [33X[0;0Y[10XIsStronglyOGR[110X is a synonym for [2XIsStronglyOrbitalGraphRecognisable[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XIsStronglyOrbitalGraphRecognisable(CyclicGroup(IsPermGroup, 8));[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsStronglyOGR(QuaternionGroup(IsPermGroup, 8));[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsStronglyOGR(TrivialGroup(IsPermGroup));[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X1.3-3 IsAbsolutelyOrbitalGraphRecognisable[101X
+  
+  [33X[1;0Y[29X[2XIsAbsolutelyOrbitalGraphRecognisable[102X( [3XG[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YThe permutation group [3XG[103X is [13Xabsolutely orbital graph recognisable (absolutely
+  OGR)[113X if and only if [13Xevery[113X orbital graph of [3XG[103X has automorphism group equal to
+  [3XG[103X.[133X
+  
+  [33X[0;0YNote  that  every  absolutely  OGR  group  is  also  strongly  orbital graph
+  recognisable, see [2XIsStronglyOrbitalGraphRecognisable[102X ([14X1.3-2[114X).[133X
+  
+  [33X[0;0Y[10XIsAsolutelyOGR[110X is a synonym for [2XIsAbsolutelyOrbitalGraphRecognisable[102X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XIsAbsolutelyOrbitalGraphRecognisable(DihedralGroup(IsPermGroup, 8));[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsAbsolutelyOGR(CyclicGroup(IsPermGroup, 8));[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsAbsolutelyOGR(TrivialGroup(IsPermGroup));[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  

@@ -1,0 +1,72 @@
+  
+  
+                                [1X OrbitalGraphs [101X
+  
+  
+                       [1X Computations with orbital graphs [101X
+  
+  
+                                     0.1.1
+  
+  
+                                2 September 2021
+  
+  
+                                 Paula Hähndel
+  
+                                Markus Pfeiffer
+  
+                                 Wilf A. Wilson
+  
+  
+  
+  Paula Hähndel
+      Email:    [7Xmailto:paula.haehndel@mathematik.uni-halle.de[107X
+      Homepage: [7Xhttps://algebra.mathematik.uni-halle.de/haehndel[107X
+      Address:  [33X[0;14YMartin-Luther-Universität Halle-Wittenberg[133X
+                [33X[0;14Y06099 Halle (Saale)[133X
+  
+  
+  Markus Pfeiffer
+      Email:    [7Xmailto:markus.pfeiffer@st-andrews.ac.uk[107X
+      Homepage: [7Xhttps://markusp.morphism.de[107X
+      Address:  [33X[0;14YSchool  of  Computer  Science,  University  of  St Andrews, St
+                Andrews, Fife, KY16 9SX, Scotland[133X
+  
+  
+  Wilf A. Wilson
+      Email:    [7Xmailto:gap@wilf-wilson.net[107X
+      Homepage: [7Xhttps://wilf.me[107X
+      Address:  [33X[0;14YSchool  of  Computer  Science,  University  of  St Andrews, St
+                Andrews, Fife, KY16 9SX, Scotland[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2018-present by Paula Hähndel, Markus Pfeiffer, and Wilf A. Wilson.[133X
+  
+  [33X[0;0Y[5XOrbitalGraphs[105X is licensed under the Mozilla Public License, version 2.0.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (OrbitalGraphs)[101X
+  
+  1 [33X[0;0YOrbital graphs[133X
+    1.1 [33X[0;0YConstructing orbital graphs[133X
+      1.1-1 OrbitalGraphs
+    1.2 [33X[0;0YValues computed from orbital graphs[133X
+      1.2-1 OrbitalClosure
+      1.2-2 OrbitalIndex
+    1.3 [33X[0;0YRecognising a group from its orbital graphs[133X
+      1.3-1 IsOrbitalGraphRecognisable
+      1.3-2 IsStronglyOrbitalGraphRecognisable
+      1.3-3 IsAbsolutelyOrbitalGraphRecognisable
+  
+  
+  [32X
