@@ -37,6 +37,6 @@ make bootstrap-pkg-full WGET="wget -N --no-check-certificate --tries=5 --waitret
 # directly call BuildPackages.sh from .travis.yml. For an example of the
 # former, take a look at the cvec package.
 cd pkg
-for pkg in ${GAP_PKGS_TO_BUILD-io profiling}; do
+for pkg in ${GAP_PKGS_TO_BUILD-io profiling orb digraphs grape}; do
     ../bin/BuildPackages.sh --strict $pkg*
 done
