@@ -34,7 +34,7 @@ Persons := [
     IsAuthor := true,
     IsMaintainer := false,
     FirstNames := "Paula",
-    LastName := "",
+    LastName := "Hähndel",
     WWWHome := "https://paula",
     Email := "TODO",
     PostalAddress := "TODO",
@@ -81,7 +81,9 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">= 4.8",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ] ],
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ]
+                         , [ "Digraphs", ">= 0.12.1"]
+                         , [ "ferret", ">= 0.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],
 ),
