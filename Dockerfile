@@ -8,9 +8,8 @@ USER root
 
 RUN apt-get update && apt-get install python3-pip -y
 
-RUN rm -rf $HOME/inst/gap-master/pkg/francy && mv $HOME/OrbitalGraphs/gap $HOME/inst/gap-master/pkg/francy \
-  && cd $HOME/inst/gap-master/pkg && git clone --single-branch -b develop https://github.com/gap-packages/FrancyMonoids \
-  && git clone https://github.com/mcmartins/subgroup-lattice
+RUN rm -rf $HOME/inst/gap-master/pkg/francy && mv $HOME/OrbitalGraphs $HOME/inst/gap-master/pkg \
+  && cd $HOME/inst/gap-master/pkg && git clone https://github.com/mcmartins/francy 
 
 USER gap
 
