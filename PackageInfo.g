@@ -83,6 +83,8 @@ Dependencies := rec(
   GAP := ">= 4.8",
   NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ]
                          , [ "Digraphs", ">= 0.12.1"]
+# We do not really need ferret, only for intersections
+# of automorphism groups
 #                         , [ "ferret", ">= 0.0" ]
                          ],
   SuggestedOtherPackages := [ ],
