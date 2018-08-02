@@ -39,3 +39,7 @@ gap> IsomorphismGroups(G, OrbitalClosure(G)) <> fail;
 false
 
 #
+gap> S := Semigroup(Transformation([1,1,1]), Transformation([3,3,3]));;
+gap> OrbitalGraphs(S);;
+
+#
