@@ -29,18 +29,18 @@
 #    return Draw(canvas);
 #end;
 
-nubb := function(L)
-    local cls, ccls, ll;
-
-    ll := ShallowCopy(L);
-    cls := [];
-
-    while not IsEmpty(ll) do
-        Add(cls, ll[1]);
-        ccls := ll[1];
-        ll := Filtered(ll, x -> not IsIsomorphicDigraph(x, ccls));
-    od;
-
-    return cls;
-end;
-
+#nubb := function(L)
+#    local cls, ccls, ll;
+#
+#    ll := ShallowCopy(L);
+#    cls := [];
+#
+#    while not IsEmpty(ll) do
+#        Add(cls, ll[1]);
+#        ccls := ll[1];
+#        ll := Filtered(ll, x -> not IsIsomorphicDigraph(x, ccls));
+#    od;
+#
+#    return cls;
+#end;
+#
