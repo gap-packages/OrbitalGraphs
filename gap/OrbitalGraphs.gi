@@ -104,6 +104,9 @@ function(G)
     return Size(OrbitalClosure(G)) = Size(G);
 end);
 
+InstallTrueMethod(IsOrbitalGraphRecognisable,
+                  IsStronglyOrbitalGraphRecognisable);
+
 InstallMethod( OrbitalIndex, "for a permutation group",
                [ IsPermGroup ],
 function(G)
@@ -116,6 +119,9 @@ function(G)
     # TODO check that this is right.
     return ForAny(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
+
+InstallTrueMethod(IsStronglyOrbitalGraphRecognisable,
+                  IsAbsolutelyOrbitalGraphRecognisable);
 
 InstallMethod( IsAbsolutelyOrbitalGraphRecognisable, "for a permutation group",
                [ IsPermGroup ],
