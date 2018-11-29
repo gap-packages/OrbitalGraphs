@@ -69,7 +69,7 @@ function(G)
                 fi;
                 for val in orb do
                     p := orbreps[val];
-                        graph[val] := List(iorb, x -> x^p);
+                    graph[val] := List(iorb, x -> x^p);
                 od;
                 Add(graphlist, Digraph(graph));
             fi;
@@ -77,19 +77,6 @@ function(G)
     od;
     Sort(graphlist);
     return MakeImmutable(graphlist);
-end);
-
-InstallMethod( OrbitalGraphs, "for a transformation semigroup",
-               [ IsTransformationSemigroup ],
-function(S)
-    # TODO: This is currently super-naive
-    local bpts, l;
-
-    bpts := Filtered(Tuples([1..LargestMovedPoint(S)], 2), x -> x[1] <> x[2]);
-
-    l := List(bpts, x -> DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples)))));
-    Sort(l);
-    return MakeImmutable(l);
 end);
 
 InstallMethod( OrbitalClosure, "for a permutation group",
@@ -132,4 +119,19 @@ function(G)
     # TODO check that this is right.
     return ForAll(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
+
+
+# Transformation Semigroups
+
+InstallMethod( OrbitalGraphs, "for a transformation semigroup",
+[ IsTransformationSemigroup ],
+function(S)
+    # TODO: This is currently super-naive
+    local bpts;
+
+    bpts := Filtered(Tuples([1..LargestMovedPoint(S)], 2), x -> x[1] <> x[2]);
+
+    return List(bpts, x -> DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples)))));
+end);
+
 
