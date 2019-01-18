@@ -13,11 +13,11 @@ RUN rm -rf $HOME/inst/gap-master/pkg/francy && mv $HOME/OrbitalGraphs $HOME/inst
   && cd $HOME/inst/gap-master/pkg && rm -rf francy* && git clone https://github.com/mcmartins/francy 
 
 # lab extension installation
-RUN cd $HOME/inst/gap-master/pkg/francy/js && npm install && npm run build:all \
-  && cd $HOME/inst/gap-master/pkg/francy/extensions/jupyter && npm install && npm run build:all && pip3 install -e . && jupyter labextension link \
-  && mv $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/nbextension $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/jupyter_francy \
-  && jupyter nbextension install $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/jupyter_francy --user \
-  && jupyter nbextension enable jupyter_francy/extension --user
+# RUN cd $HOME/inst/gap-master/pkg/francy/js && npm install && npm run build:all \
+#  && cd $HOME/inst/gap-master/pkg/francy/extensions/jupyter && npm install && npm run build:all && pip3 install -e . && jupyter labextension link \
+#  && mv $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/nbextension $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/jupyter_francy \
+#  && jupyter nbextension install $HOME/inst/gap-master/pkg/francy/extensions/jupyter/jupyter_francy/jupyter_francy --user \
+#  && jupyter nbextension enable jupyter_francy/extension --user
 
 
 USER gap
