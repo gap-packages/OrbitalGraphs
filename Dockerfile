@@ -1,4 +1,4 @@
-FROM gapsystem/gap-docker-master:francy
+FROM gapsystem/gap-docker-master
 
 MAINTAINER Markus Pfeiffer <markus.pfeiffer@morphism.de>
 
