@@ -199,6 +199,22 @@ DeclareAttribute("UnderlyingSemigroup", IsOrbitalGraphOfSemigroup);
 #! @EndExampleSession
 DeclareAttribute("OrbitalClosure", IsPermGroup);
 
+#! @Description
+#!  Computes the orbital closure of a permutation group by constructing
+#!  a single edge-coloured graph from all orbital graphs by assigning an edge
+#!  colour to each orbital graph and taking the uninion of these coloured edges
+#!  to obtain the resulting graph.
+#!  The automorphism group of this graph is the same as the intersecion of the
+#!  automorphism groups of all orbital graphs, but in some cases where a group
+#!  has many orbital graphs, the direct computation of the automorphism group
+#!  of the edge-coloured graph might be more efficient than first computing
+#!  separate automorphism groups and then intersecting them in a separate step.
+#!
+#!  Since this is an experimental feature we just provide a separate function
+#!  and don't hook this method up yet, before we evaluated whether this method
+#!  works properly and mostly faster.
+DeclareGlobalFunction("OrbitalClosureByColouredEdges");
+
 #! @Arguments G
 #! @Returns A positive integer
 #! @Description
