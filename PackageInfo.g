@@ -96,6 +96,7 @@ Dependencies := rec(
 # We do not really need ferret, only for intersections
 # of automorphism groups
 #                         , [ "ferret", ">= 0.0" ]
+                          , [ "datastructures", ">= 0.2.3" ]
                          ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],
