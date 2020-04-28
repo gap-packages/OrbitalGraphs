@@ -3,7 +3,7 @@ env:
   global:
     - GAPROOT=gaproot
     - COVDIR=coverage
-    - GAP_PKGS_TO_BUILD="io profiling orb digraphs grape"
+    - GAP_PKGS_TO_BUILD="io profiling orb digraphs grape datastructures"
 
 addons:
   apt_packages:
@@ -21,10 +21,6 @@ matrix:
     - env: CFLAGS="-O2"
       compiler: gcc
     - env: ABI=32
-
-branches:
-  only:
-    - master
 
 before_script:
   - export GAPROOT="$HOME/gap"
