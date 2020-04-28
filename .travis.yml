@@ -22,10 +22,6 @@ matrix:
       compiler: gcc
     - env: ABI=32
 
-branches:
-  only:
-    - master
-
 before_script:
   - export GAPROOT="$HOME/gap"
   - git clone https://github.com/gap-system/pkg-ci-scripts.git scripts
