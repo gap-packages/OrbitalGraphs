@@ -129,8 +129,7 @@ function(S)
     # TODO: This is currently super-naive
     local bpts;
 
-    bpts := Filtered(Tuples([1..LargestMovedPoint(S)], 2), x -> x[1] <> x[2]);
-
+    bpts := Arrangements([1..LargestMovedPoint(S)], 2);
     return List(bpts, x -> DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples)))));
 end);
 

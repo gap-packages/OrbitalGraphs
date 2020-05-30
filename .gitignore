@@ -17,8 +17,10 @@
 /doc/*.six
 /doc/*.tex
 /doc/*.toc
+/doc/_*.xml
+/doc/title.xml
+/doc/OrbitalGraphs.xml
 /doc/manual.pdf
-
 .deps/
 .dirstamp
 .libs/
