@@ -15,8 +15,7 @@ InstallMethod( OrbitalGraphs, "for a permutation group"
              , [ IsPermGroup ],
 function(G)
     local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes,
-          orbpos, innerorblist, orbitsizes, iggestOrbit, skippedOneLargeOrbit,
-          orbreps, stabtime, timefunc, fillRepElts, maxval;
+          orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, maxval;
 
     # TODO: Option?
     maxval := NrMovedPoints(G);
