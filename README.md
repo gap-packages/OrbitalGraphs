@@ -11,4 +11,3 @@ If you want to experiment with the code, use the binder link below.
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/gap-packages/OrbitalGraphs/master)
 
-just text
