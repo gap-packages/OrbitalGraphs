@@ -15,10 +15,11 @@ InstallMethod( OrbitalGraphs, "for a permutation group"
              , [ IsPermGroup ],
 function(G)
     local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes,
-          orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, maxval;
+          orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, lmp, moved;
 
-    # TODO: Option?
-    maxval := NrMovedPoints(G);
+    # FIXME: Add option for specifying which points we select base pairs from
+    moved := MovedPoints(G);
+    lmp := LargestMovedPoint(G);
 
     fillRepElts := function(G, orb)
         local val, g, reps, buildorb, gens;
@@ -38,7 +39,7 @@ function(G)
     end;
 
     graphlist := [];
-    orbitsG := Orbits(G, [1..maxval]);
+    orbitsG := Orbits(G, moved);
 
     orbsizes := [];
     orbpos := [];
@@ -51,7 +52,7 @@ function(G)
         od;
     od;
 
-    innerorblist := List(orbitsG, o -> Orbits(Stabilizer(G, o[1]), [1..LargestMovedPoint(G)]));
+    innerorblist := List(orbitsG, o -> Orbits(Stabilizer(G, o[1]), moved));
     orbitsizes := List([1..Length(orbitsG)],
                        x -> List(innerorblist[x], y -> Size(orbitsG[x])*Size(y)));
 
@@ -62,7 +63,7 @@ function(G)
         for iorb in innerorblist[i] do
             if not(orb[1] = iorb[1] and Size(iorb) = 1)
             then
-                graph := List([1..LargestMovedPoint(G)], x -> []);
+                graph := List([1..lmp], x -> []);
                 if IsEmpty(orbreps) then
                     orbreps := fillRepElts(G, orb);
                 fi;
@@ -131,5 +132,3 @@ function(S)
     bpts := Arrangements([1..LargestMovedPoint(S)], 2);
     return List(bpts, x -> DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples)))));
 end);
-
-
