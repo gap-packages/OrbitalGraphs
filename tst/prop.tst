@@ -1,4 +1,7 @@
 #
+gap> START_TEST("OrbitalGraphs package: prop.tst");
+gap> LoadPackage("orbitalgraphs", false);;
+
 #
 gap> G := SymmetricGroup(10);;
 gap> IsOrbitalGraphRecognisable(G);
@@ -43,3 +46,4 @@ gap> S := Semigroup(Transformation([1,1,1]), Transformation([3,3,3]));;
 gap> OrbitalGraphs(S);;
 
 #
+gap> STOP_TEST("OrbitalGraphs package: prop.tst", 0);
