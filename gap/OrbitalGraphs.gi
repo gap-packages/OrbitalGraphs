@@ -19,7 +19,7 @@ function(G)
           orbreps, stabtime, timefunc, fillRepElts, maxval;
 
     # TODO: Option?
-    maxval := NrMovedPoints(G);
+    maxval := LargestMovedPoint(G);
 
     fillRepElts := function(G, orb)
         local val, g, reps, buildorb, gens;
