@@ -22,11 +22,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: gap-actions/setup-gap-for-packages@v1
+      - uses: gap-actions/setup-gap@v2
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
           GAP_PKGS_TO_BUILD: 'io profiling orb digraphs grape datastructures'
-      - uses: gap-actions/run-test-for-packages@v1
+      - uses: gap-actions/run-pkg-tests@v2
+      - uses: gap-actions/process-coverage@v2
+      - uses: codecov/codecov-action@v1
 
   # The documentation job
   manual:
@@ -37,12 +39,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: gap-actions/setup-gap-for-packages@v1
-      - uses: gap-actions/compile-documentation-for-packages@v1
+      - uses: gap-actions/setup-gap@v2
+        with:
+          GAP_PKGS_TO_BUILD: ''
+      - uses: gap-actions/build-pkg-docs@v1
         with:
           use-latex: 'true'
       - name: 'Upload documentation'
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: manual
-          path: ./doc/manual.pdf
+          name: "OrbitalGraphs manual"
+          retention-days: 7
+          path: |
+            doc/manual.pdf
+            doc/*.html
+            doc/*.css
+            doc/*.js
