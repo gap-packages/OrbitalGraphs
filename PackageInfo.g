@@ -47,11 +47,13 @@ Persons := [
 
 SourceRepository := rec(
     Type := "git",
-    URL := Concatenation( "https://github.com/markuspf/", ~.PackageName ),
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 #SupportEmail   := "TODO",
-PackageWWWHome  := "https://markuspf.github.io/OrbitalGraphs/",
+PackageWWWHome  := ~.SourceRepository.URL,
+#TODO Publish the following webpage and use this URL instead:
+#PackageWWWHome  := "https://gap-packages.github.io/OrbitalGraphs",
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
