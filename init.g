@@ -1,4 +1,4 @@
-# OrbitalGraphs: Computations with orbital graphs
+# OrbitalGraphs: Computations with orbital graphs in GAP
 # A GAP package by Paula Hähndel, Markus Pfeiffer, and Wilf A. Wilson.
 #
 # SPDX-License-Identifier: MPL-2.0
