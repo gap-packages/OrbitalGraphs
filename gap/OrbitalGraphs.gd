@@ -9,16 +9,16 @@
 
 #! @Section Constructing orbital graphs
 
+
 # TODO: Give a definition of orbital graphs
 # TODO: Implement constructing the orbital graph with a given base pair
 # TODO: Implement allowing the set of points (vertices) to be specified
 #! @BeginGroup orbitals
 #! @Arguments G
-#! @Returns A list of digraphs
+#! @Returns A list of orbital graphs
 #! @Description
-#!   This attribute is an immutable list of all orbital graphs of
-#!   the permutation group <A>G</A>
-#!   or transformation semigroup <A>S</A>.
+#!   This attribute is a list of all orbital graphs of the permutation group
+#!   <A>G</A> or transformation semigroup <A>S</A>.
 #!
 #!   The order of the returned list is not specified.
 DeclareAttribute("OrbitalGraphs", IsPermGroup);
@@ -32,10 +32,11 @@ DeclareAttribute("OrbitalGraphs", IsPermGroup);
 #! @EndLogSession
 DeclareAttribute("OrbitalGraphs", IsTransformationSemigroup);
 
+
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);
 
 
-#! @Section Values computed from orbital graphs
+#! @Section Values computed from the orbital graphs of a group
 
 #! @Arguments G
 #! @Returns A permutation group

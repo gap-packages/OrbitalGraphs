@@ -89,8 +89,15 @@ function(G)
     return Intersection(List(OrbitalGraphs(G), AutomorphismGroup));
 end);
 
-InstallMethod( IsOrbitalGraphRecognisable, "for a permutation group",
-               [ IsPermGroup ],
+
+InstallMethod(OrbitalIndex, "for a permutation group", [IsPermGroup],
+function(G)
+    return Index(OrbitalClosure(G), G);
+end);
+
+
+InstallTrueMethod(IsOGR, IsStronglyOGR);
+InstallMethod(IsOGR, "for a permutation group", [IsPermGroup],
 function(G)
     if IsTransitive(G) and Transitivity(G) > 1 then
         return IsNaturalSymmetricGroup(G);
@@ -99,16 +106,8 @@ function(G)
     return Size(G) = Size(OrbitalClosure(G));
 end);
 
-InstallTrueMethod(IsOGR, IsStronglyOGR);
-
-InstallMethod( OrbitalIndex, "for a permutation group",
-               [ IsPermGroup ],
-function(G)
-    return Index(OrbitalClosure(G), G);
-end);
-
-InstallMethod( IsStronglyOrbitalGraphRecognisable, "for a permutation group",
-               [ IsPermGroup ],
+InstallTrueMethod(IsStronglyOGR, IsAbsolutelyOGR);
+InstallMethod(IsStronglyOGR, "for a permutation group", [IsPermGroup],
 function(G)
     if IsTransitive(G) and Transitivity(G) > 1 then
         return IsNaturalSymmetricGroup(G);
@@ -117,10 +116,9 @@ function(G)
            ForAny(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
 
-InstallTrueMethod(IsStronglyOGR, IsAbsolutelyOGR);
-
-InstallMethod( IsAbsolutelyOrbitalGraphRecognisable, "for a permutation group",
-               [ IsPermGroup ],
+InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsNaturalSymmetricGroup);
+InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsTrivial);
+InstallMethod(IsAbsolutelyOGR, "for a permutation group", [IsPermGroup],
 function(G)
     if IsTransitive(G) and Transitivity(G) > 1 then
         return IsNaturalSymmetricGroup(G);
@@ -128,14 +126,11 @@ function(G)
     return ForAll(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
 
-InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsNaturalSymmetricGroup);
-InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsTrivial);
 
+# Transformation semigroups
 
-# Transformation Semigroups
-
-InstallMethod( OrbitalGraphs, "for a transformation semigroup",
-[ IsTransformationSemigroup ],
+InstallMethod(OrbitalGraphs, "for a transformation semigroup",
+[IsTransformationSemigroup],
 function(S)
     # TODO: This is currently super-naive
     local bpts;
