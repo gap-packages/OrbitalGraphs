@@ -1,6 +1,8 @@
-#
 # OrbitalGraphs: Computations with orbital graphs
+# A GAP package by Paula Hähndel, Markus Pfeiffer, and Wilf A. Wilson.
 #
+# SPDX-License-Identifier: MPL-2.0
+
 _STANDREWSCS := Concatenation("School of Computer Science, ",
                               "University of St Andrews, ",
                               "St Andrews, Fife, KY16 9SX, Scotland");
@@ -10,6 +12,7 @@ PackageName := "OrbitalGraphs",
 Subtitle := "Computations with orbital graphs",
 Version := "0.1.1",
 Date := "02/09/2021", # dd/mm/yyyy format
+License := "MPL-2.0",
 
 Persons := [
   rec(
@@ -106,6 +109,19 @@ AvailabilityTest := function()
 TestFile := "tst/testall.g",
 
 #Keywords := [ "TODO" ],
+
+AutoDoc := rec(
+  TitlePage := rec(
+    Copyright := Concatenation(
+      "&copyright; 2018-present by Paula Hähndel, Markus Pfeiffer, ",
+      "and Wilf A. Wilson.",
+      "<P/>",
+      "&OrbitalGraphs; is licensed under the ",
+      "Mozilla Public License, version 2.0."
+      ),
+    Abstract := ~.AbstractHTML,
+  )
+),
 
 ));
 

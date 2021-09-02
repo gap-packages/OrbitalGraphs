@@ -1,8 +1,9 @@
-#
 # OrbitalGraphs: Computations with orbital graphs
+# A GAP package by Paula Hähndel, Markus Pfeiffer, and Wilf A. Wilson.
+#
+# SPDX-License-Identifier: MPL-2.0
 #
 # Implementations
-#
 
 # The code below is essentially stolen from ferret;
 #       Do we want to give a naive version that
