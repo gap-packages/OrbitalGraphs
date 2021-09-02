@@ -108,6 +108,27 @@ function(G, points)
 end);
 
 
+# Transformation semigroups
+
+InstallMethod(OrbitalGraphs, "for a transformation semigroup",
+[IsTransformationSemigroup],
+function(S)
+    # FIXME This is currently super-naive
+    local bpts, out, D, x;
+
+    bpts := Arrangements([1..LargestMovedPoint(S)], 2);
+    out := [];
+    for x in bpts do
+      D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
+      SetFilterObj(D, IsOrbitalGraphOfSemigroup);
+      SetUnderlyingSemigroup(D, S);
+      SetBasePair(D, x);
+      AddSet(out, D);
+    od;
+    return out;
+end);
+
+
 ## Information stored about orbital graphs at creation
 
 
@@ -120,6 +141,10 @@ function(D)
     j := Minimum(nbs[i]);
     return [i, j];
 end);
+
+
+## Values computed from the orbital graphs of a group
+
 
 InstallMethod(OrbitalClosure, "for a permutation group",
 [IsPermGroup],
@@ -135,6 +160,9 @@ InstallMethod(OrbitalIndex, "for a permutation group", [IsPermGroup],
 function(G)
     return Index(OrbitalClosure(G), G);
 end);
+
+
+## Recognising a group from its orbital graphs
 
 
 InstallTrueMethod(IsOGR, IsStronglyOGR);
@@ -168,25 +196,7 @@ function(G)
 end);
 
 
-# Transformation semigroups
 
-InstallMethod(OrbitalGraphs, "for a transformation semigroup",
-[IsTransformationSemigroup],
-function(S)
-    # FIXME This is currently super-naive
-    local bpts, out, D, x;
-
-    bpts := Arrangements([1..LargestMovedPoint(S)], 2);
-    out := [];
-    for x in bpts do
-      D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
-      SetFilterObj(D, IsOrbitalGraphOfSemigroup);
-      SetUnderlyingSemigroup(D, S);
-      SetBasePair(D, x);
-      AddSet(out, D);
-    od;
-    return out;
-end);
 
 
 ## Attributes and properties of individual orbital graphs
