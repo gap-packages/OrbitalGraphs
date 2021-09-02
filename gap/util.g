@@ -1,5 +1,3 @@
-
-
 # Helper functions and prototypes that will be (re)moved.
 
 # TODO
