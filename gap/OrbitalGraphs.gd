@@ -52,7 +52,6 @@ DeclareCategory("IsOrbitalGraphOfSemigroup", IsOrbitalGraph);
 
 
 # TODO: Give a definition of orbital graphs
-# TODO: Implement constructing the orbital graph with a given base pair
 # TODO Document allowing the set of points (vertices) to be specified
 #! @BeginGroup orbitals
 #! @Arguments G
@@ -83,6 +82,24 @@ DeclareOperation("OrbitalGraphs", [IsPermGroup, IsPosInt]);
 
 
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);
+
+
+# TODO: Implement constructing the orbital graph with a given base pair
+#! @BeginGroup orbital
+#! @Returns An orbital graph
+#! @Arguments G, u, v
+#! @Description
+#!   TODO.
+DeclareOperation("OrbitalGraph", [IsPermGroup, IsPosInt, IsPosInt]);
+#! @EndGroup
+#! @Group orbital
+#! @Arguments G, basepair
+#! @BeginExampleSession
+#! gap> true;
+#! true
+#! @EndExampleSession
+DeclareOperation("OrbitalGraph", [IsPermGroup, IsHomogeneousList]);
+
 
 #! @Section Information stored about orbital graphs at creation
 
