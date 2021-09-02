@@ -77,7 +77,8 @@ function(G)
         od;
     od;
     Sort(graphlist);
-    return MakeImmutable(graphlist);
+    Perform(graphlist, function(x) SetFilterObj(x, IsOrbitalGraphOfGroup); end);
+    return graphlist;
 end);
 
 InstallMethod(OrbitalClosure, "for a permutation group",
@@ -139,6 +140,7 @@ function(S)
     out := [];
     for x in bpts do
       D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
+      SetFilterObj(D, IsOrbitalGraphOfSemigroup);
       AddSet(out, D);
     od;
     return out;

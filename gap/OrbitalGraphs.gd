@@ -7,6 +7,47 @@
 
 #! @Chapter Orbital graphs
 
+
+#! @Section Categories of orbital graphs
+
+
+#! @Arguments D
+#! @Description
+#!   Every orbital graph that is constructed with the &OrbitalGraphs; package
+#!   is a <Package>Digraphs</Package> package digraph
+#!   (see <Ref Filt="IsDigraph" BookName="Digraphs" Style="Number"/>)
+#!   that additionally lies in the category
+#!   <Ref Filt="IsOrbitalGraph" Label="for IsDigraph"/>.
+#!
+#!   This makes it easy to recognise orbital graphs that were created
+#!   with this package.
+DeclareCategory("IsOrbitalGraph", IsDigraph);
+
+#! @Arguments D
+#! @Description
+#!   Every orbital graph that is constructed from a permutation group
+#!   with the &OrbitalGraphs; package lies in the category
+#!   <Ref Filt="IsOrbitalGraphOfGroup" Label="for IsOrbitalGraph"/>,
+#!   which is a subcategory of
+#!   <Ref Filt="IsOrbitalGraph" Label="for IsDigraph"/>.
+#!
+#!   This makes it easy to recognise orbital graphs that were created
+#!   from groups with this package.
+DeclareCategory("IsOrbitalGraphOfGroup", IsOrbitalGraph);
+
+#! @Arguments D
+#! @Description
+#!   Every orbital graph that is constructed from a transformation semigroup
+#!   with the &OrbitalGraphs; package lies in the category
+#!   <Ref Filt="IsOrbitalGraphOfGroup" Label="for IsOrbitalGraph"/>,
+#!   which is a subcategory of
+#!   <Ref Filt="IsOrbitalGraph" Label="for IsDigraph"/>.
+#!
+#!   This makes it easy to recognise orbital graphs that were created
+#!   from semigroups with this package.
+DeclareCategory("IsOrbitalGraphOfSemigroup", IsOrbitalGraph);
+
+
 #! @Section Constructing orbital graphs
 
 
