@@ -233,7 +233,7 @@ function(D)
     if IsSelfPaired(D) then
         Append(str, "self-paired ");
     fi;
-    Append(str, "orbital graph of ");
+    Append(str, "orbital graph \>of ");
     if HasName(G) then
         Append(str, Name(G));
     elif HasStructureDescription(G) then
@@ -241,17 +241,15 @@ function(D)
     else
         Append(str, ViewString(G));
     fi;
-    if not list_vertices then
-        Append(str, " on ");
-        Append(str, String(DigraphNrVertices(D)));
-        Append(str, " vertices");
-    fi;
-    Append(str, " with base-pair ");
-    Append(str, ViewString(BasePair(D)));
-    if list_vertices then
-        Append(str, " and vertices ");
-        Append(str, PrintString(DigraphVertices(D)));
-    fi;
-    Append(str, ">");
+    Append(str, "\< on \>");
+    Append(str, String(DigraphNrVertices(D)));
+    Append(str, " vertices\<");
+    Append(str, " \>with \>base-pair \>(");
+    Append(str, String(BasePair(D)[1]));
+    Append(str, ",");
+    Append(str, String(BasePair(D)[2]));
+    Append(str, "),\<\< ");
+    Append(str, PrintString(DigraphNrEdges(D)));
+    Append(str, " arcs>\<");
     return str;
 end);

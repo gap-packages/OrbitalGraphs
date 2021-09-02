@@ -10,23 +10,31 @@
 #
 gap> START_TEST("orbitalgraphs01.tst");
 
-# doc/_Chapter_Orbital_graphs.xml:102-105
+# doc/_Chapter_Orbital_graphs.xml:80-87
+gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
+"D8"
+gap> OrbitalGraphs(D8);
+[ <self-paired orbital graph of D8 on 4 vertices with base-pair (1,3), 4 arcs>
+    , <self-paired orbital graph of D8 on 4 vertices 
+    with base-pair (1,2), 8 arcs> ]
+
+# doc/_Chapter_Orbital_graphs.xml:101-104
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:136-139
+# doc/_Chapter_Orbital_graphs.xml:135-138
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:155-158
+# doc/_Chapter_Orbital_graphs.xml:154-157
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:174-177
+# doc/_Chapter_Orbital_graphs.xml:173-176
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:206-218
+# doc/_Chapter_Orbital_graphs.xml:205-217
 gap> OrbitalClosure(PSL(2,5)) = SymmetricGroup(6);
 true
 gap> C6 := CyclicGroup(IsPermGroup, 6);;
@@ -39,7 +47,7 @@ gap> IsConjugate(SymmetricGroup(6),
 >                closure, WreathProduct(Group([(1,2)]), Group([(1,2,3)])));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:234-243
+# doc/_Chapter_Orbital_graphs.xml:233-242
 gap> OrbitalIndex(PSL(2,5));
 12
 gap> OrbitalIndex(PGL(2,5));
@@ -49,7 +57,7 @@ gap> OrbitalIndex(AlternatingGroup(6));
 gap> OrbitalIndex(DihedralGroup(IsPermGroup, 6));
 1
 
-# doc/_Chapter_Orbital_graphs.xml:270-277
+# doc/_Chapter_Orbital_graphs.xml:269-276
 gap> IsOrbitalGraphRecognisable(QuaternionGroup(IsPermGroup, 8));
 true
 gap> IsOGR(AlternatingGroup(8));
@@ -57,7 +65,7 @@ false
 gap> IsOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:301-308
+# doc/_Chapter_Orbital_graphs.xml:300-307
 gap> IsStronglyOrbitalGraphRecognisable(CyclicGroup(IsPermGroup, 8));
 true
 gap> IsStronglyOGR(QuaternionGroup(IsPermGroup, 8));
@@ -65,7 +73,7 @@ false
 gap> IsStronglyOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:332-339
+# doc/_Chapter_Orbital_graphs.xml:331-338
 gap> IsAbsolutelyOrbitalGraphRecognisable(DihedralGroup(IsPermGroup, 8));
 true
 gap> IsAbsolutelyOGR(CyclicGroup(IsPermGroup, 8));

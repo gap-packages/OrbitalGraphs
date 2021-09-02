@@ -69,15 +69,14 @@ DeclareOperation("OrbitalGraphs", [IsPermGroup, IsHomogeneousList]);
 #! @EndGroup
 #! @Group orbitals
 #! @Arguments G, max
-#! @BeginLogSession
+#! @BeginExampleSession
 #! gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
 #! "D8"
 #! gap> OrbitalGraphs(D8);
-#! [ <self-paired orbital graph of D8 with base-pair 
-#!     [ 1, 3 ] and vertices [ 1 .. 4 ]>, 
-#!   <self-paired orbital graph of D8 with base-pair 
-#!     [ 1, 2 ] and vertices [ 1 .. 4 ]> ]
-#! @EndLogSession
+#! [ <self-paired orbital graph of D8 on 4 vertices with base-pair (1,3), 4 arcs>
+#!     , <self-paired orbital graph of D8 on 4 vertices 
+#!     with base-pair (1,2), 8 arcs> ]
+#! @EndExampleSession
 DeclareOperation("OrbitalGraphs", [IsPermGroup, IsPosInt]);
 
 
