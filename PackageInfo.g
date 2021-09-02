@@ -1,47 +1,51 @@
 #
-# OrbitalGraphs: Computations with Orbital Graphs
+# OrbitalGraphs: Computations with orbital graphs
 #
-# This file contains package meta data. For additional information on
-# the meaning and correct usage of these fields, please consult the
-# manual of the "Example" package as well as the comments in its
-# PackageInfo.g file.
-#
+_STANDREWSCS := Concatenation("School of Computer Science, ",
+                              "University of St Andrews, ",
+                              "St Andrews, Fife, KY16 9SX, Scotland");
 SetPackageInfo( rec(
 
 PackageName := "OrbitalGraphs",
-Subtitle := "Computations with Orbital Graphs",
-Version := "0.1",
-Date := "26/07/2018", # dd/mm/yyyy format
+Subtitle := "Computations with orbital graphs",
+Version := "0.1.1",
+Date := "02/09/2021", # dd/mm/yyyy format
 
 Persons := [
   rec(
     IsAuthor := true,
-    IsMaintainer := true,
+    IsMaintainer := false,
     FirstNames := "Markus",
     LastName := "Pfeiffer",
-    WWWHome := "https://markusp.morphism.de/",
+    WWWHome := "https://markusp.morphism.de",
     Email := "markus.pfeiffer@st-andrews.ac.uk",
-    PostalAddress := Concatenation(
-               "School of Computer Science\n",
-               "University of St Andrews\n",
-               "Jack Cole Building, North Haugh\n",
-               "St Andrews, Fife, KY16 9SX\n",
-               "United Kingdom" ),
+    PostalAddress := _STANDREWSCS,
     Place := "St Andrews",
     Institution := "University of St Andrews",
   ),
   rec(
     IsAuthor := true,
-    IsMaintainer := false,
+    IsMaintainer := true,
     FirstNames := "Paula",
     LastName := "Hähndel",
-    WWWHome := "https://algebra.mathematik.uni-halle.de/haehndel/",
+    WWWHome := "https://algebra.mathematik.uni-halle.de/haehndel",
     Email := "paula.haehndel@mathematik.uni-halle.de",
     PostalAddress := Concatenation(
                "Martin-Luther-Universität Halle-Wittenberg\n",
                "06099 Halle (Saale)"),
     Place := "Halle (Saale)",
     Institution := "Martin-Luther Universität Halle-Wittenberg",
+  ),
+  rec(
+    IsAuthor := true,
+    IsMaintainer := true,
+    FirstNames := "Wilf A.",
+    LastName := "Wilson",
+    WWWHome := "https://wilf.me",
+    Email := "gap@wilf-wilson.net",
+    PostalAddress := _STANDREWSCS,
+    Place := "St Andrews",
+    Institution := "University of St Andrews",
   ),
 ],
 
@@ -84,7 +88,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.8",
+  GAP := ">=4.8.2",
   NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ]
                          , [ "Digraphs", ">= 0.12.1"]
 # We do not really need ferret, only for intersections
