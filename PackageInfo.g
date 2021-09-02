@@ -14,17 +14,6 @@ Date := "02/09/2021", # dd/mm/yyyy format
 Persons := [
   rec(
     IsAuthor := true,
-    IsMaintainer := false,
-    FirstNames := "Markus",
-    LastName := "Pfeiffer",
-    WWWHome := "https://markusp.morphism.de",
-    Email := "markus.pfeiffer@st-andrews.ac.uk",
-    PostalAddress := _STANDREWSCS,
-    Place := "St Andrews",
-    Institution := "University of St Andrews",
-  ),
-  rec(
-    IsAuthor := true,
     IsMaintainer := true,
     FirstNames := "Paula",
     LastName := "Hähndel",
@@ -35,6 +24,17 @@ Persons := [
                "06099 Halle (Saale)"),
     Place := "Halle (Saale)",
     Institution := "Martin-Luther Universität Halle-Wittenberg",
+  ),
+  rec(
+    IsAuthor := true,
+    IsMaintainer := false,
+    FirstNames := "Markus",
+    LastName := "Pfeiffer",
+    WWWHome := "https://markusp.morphism.de",
+    Email := "markus.pfeiffer@st-andrews.ac.uk",
+    PostalAddress := _STANDREWSCS,
+    Place := "St Andrews",
+    Institution := "University of St Andrews",
   ),
   rec(
     IsAuthor := true,
