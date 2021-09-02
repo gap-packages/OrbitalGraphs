@@ -14,7 +14,15 @@ gap> START_TEST("orbitalgraphs01.tst");
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:144-156
+# doc/_Chapter_Orbital_graphs.xml:131-134
+gap> true;
+true
+
+# doc/_Chapter_Orbital_graphs.xml:150-153
+gap> true;
+true
+
+# doc/_Chapter_Orbital_graphs.xml:182-194
 gap> OrbitalClosure(PSL(2,5)) = SymmetricGroup(6);
 true
 gap> C6 := CyclicGroup(IsPermGroup, 6);;
@@ -27,7 +35,7 @@ gap> IsConjugate(SymmetricGroup(6),
 >                closure, WreathProduct(Group([(1,2)]), Group([(1,2,3)])));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:172-181
+# doc/_Chapter_Orbital_graphs.xml:210-219
 gap> OrbitalIndex(PSL(2,5));
 12
 gap> OrbitalIndex(PGL(2,5));
@@ -37,7 +45,7 @@ gap> OrbitalIndex(AlternatingGroup(6));
 gap> OrbitalIndex(DihedralGroup(IsPermGroup, 6));
 1
 
-# doc/_Chapter_Orbital_graphs.xml:208-215
+# doc/_Chapter_Orbital_graphs.xml:246-253
 gap> IsOrbitalGraphRecognisable(QuaternionGroup(IsPermGroup, 8));
 true
 gap> IsOGR(AlternatingGroup(8));
@@ -45,7 +53,7 @@ false
 gap> IsOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:239-246
+# doc/_Chapter_Orbital_graphs.xml:277-284
 gap> IsStronglyOrbitalGraphRecognisable(CyclicGroup(IsPermGroup, 8));
 true
 gap> IsStronglyOGR(QuaternionGroup(IsPermGroup, 8));
@@ -53,7 +61,7 @@ false
 gap> IsStronglyOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:270-277
+# doc/_Chapter_Orbital_graphs.xml:308-315
 gap> IsAbsolutelyOrbitalGraphRecognisable(DihedralGroup(IsPermGroup, 8));
 true
 gap> IsAbsolutelyOGR(CyclicGroup(IsPermGroup, 8));

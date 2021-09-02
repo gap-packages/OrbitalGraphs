@@ -15,7 +15,7 @@
 InstallMethod( OrbitalGraphs, "for a permutation group"
              , [ IsPermGroup ],
 function(G)
-    local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes,
+    local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes, D,
           orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, lmp, moved;
 
     # FIXME: Add option for specifying which points we select base pairs from
@@ -72,7 +72,9 @@ function(G)
                     p := orbreps[val];
                     graph[val] := List(iorb, x -> x^p);
                 od;
-                Add(graphlist, Digraph(graph));
+                D := Digraph(graph);
+                SetUnderlyingGroup(D, G);
+                Add(graphlist, D);
             fi;
         od;
     od;
@@ -155,6 +157,7 @@ function(S)
     for x in bpts do
       D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
       SetFilterObj(D, IsOrbitalGraphOfSemigroup);
+      SetUnderlyingSemigroup(D, S);
       SetBasePair(D, x);
       AddSet(out, D);
     od;

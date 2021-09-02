@@ -102,6 +102,33 @@ DeclareAttribute("OrbitalGraphs", IsTransformationSemigroup);
 #! @EndExampleSession
 DeclareAttribute("BasePair", IsOrbitalGraph);
 
+#! @Returns A permutation group
+#! @Arguments D
+#! @Description
+#!   For an orbital graph <A>D</A> created from a permutation group `G`,
+#!   this attribute stores the value `G`.
+#!   Note that equal orbital graphs may have been created from different
+#!   groups, and may therefore have different underlying groups.
+#! @BeginExampleSession
+#! gap> true;
+#! true
+#! @EndExampleSession
+DeclareAttribute("UnderlyingGroup", IsOrbitalGraphOfGroup);
+
+#! @Returns A transformation semigroup
+#! @Arguments D
+#! @Description
+#!   For an orbital graph <A>D</A> created from a transformation semigroup `S`,
+#!   this attribute stores the value `S`.
+#!   Note that equal orbital graphs may have been created from different
+#!   semigroups, and may therefore have different underlying semigroups.
+#! @BeginExampleSession
+#! gap> true;
+#! true
+#! @EndExampleSession
+DeclareAttribute("UnderlyingSemigroup", IsOrbitalGraphOfSemigroup);
+
+
 #! @Section Values computed from the orbital graphs of a group
 
 #! @Arguments G
