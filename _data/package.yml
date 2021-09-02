@@ -56,11 +56,13 @@ citeas: |
 bibtex: |
     @misc{ OrbitalGraphs0.1.1,
       author =           {H{\"a}hndel, P. and Pfeiffer, M. and Wilson, W. A.},
-      title =            {{OrbitalGraphs}, Computations with orbital graphs, {V}ersion 0.1.1},
+      title =            {{OrbitalGraphs},  Computations  with  orbital  graphs,
+                          {V}ersion 0.1.1},
       month =            {Sep},
       year =             {2021},
       note =             {GAP package},
-      howpublished =     {\href {https://gap-packages.github.io/OrbitalGraphs} {\texttt{https://gap-packages.github.io/}\discretionary
+      howpublished =     {\href   {https://gap-packages.github.io/OrbitalGraphs}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{OrbitalGraphs}}},
       printedkey =       {HPW21}
     }
