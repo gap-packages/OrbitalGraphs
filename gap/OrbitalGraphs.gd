@@ -76,6 +76,31 @@ DeclareAttribute("OrbitalGraphs", IsTransformationSemigroup);
 
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);
 
+#! @Section Information stored about orbital graphs at creation
+
+
+# TODO define a base pair
+#! @Returns A list of two positive integers
+#! @Arguments D
+#! @Description
+#!   If <A>D</A> is an orbital graph that was constructed with respect to
+#!   a specific base pair,
+#!   then this attribute stores that value.
+#!
+#!   Otherwise, is <A>D</A> is an orbital graph of a group, then this attribute
+#!   stores the least edge of <A>D</A>,
+#!   i.e. `Minimum(DigraphEdges(<A>D</A>))`;
+#!   see <Ref Attr="DigraphEdges" BookName="Digraphs" Style="Number"/>.
+#!   If <A>D</A> is an orbital graph of a group, then this attribute stores
+#!   an arbitrary base-pair of <A>D</A>.
+#!
+#!   Note that equal orbital graphs may have different base pairs, depending
+#!   on how they were constructed.
+#! @BeginExampleSession
+#! gap> true;
+#! true
+#! @EndExampleSession
+DeclareAttribute("BasePair", IsOrbitalGraph);
 
 #! @Section Values computed from the orbital graphs of a group
 

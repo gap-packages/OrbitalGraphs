@@ -81,6 +81,20 @@ function(G)
     return graphlist;
 end);
 
+
+## Information stored about orbital graphs at creation
+
+
+InstallMethod(BasePair, "for an orbital graph of a group",
+[IsOrbitalGraphOfGroup],
+function(D)
+    local i, j, nbs;
+    nbs := OutNeighbours(D);
+    i := First(DigraphVertices(D), x -> not IsEmpty(nbs[x]));
+    j := Minimum(nbs[i]);
+    return [i, j];
+end);
+
 InstallMethod(OrbitalClosure, "for a permutation group",
 [IsPermGroup],
 function(G)
@@ -141,6 +155,7 @@ function(S)
     for x in bpts do
       D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
       SetFilterObj(D, IsOrbitalGraphOfSemigroup);
+      SetBasePair(D, x);
       AddSet(out, D);
     od;
     return out;
