@@ -10,15 +10,6 @@
 #
 gap> START_TEST("orbitalgraphs01.tst");
 
-# doc/_Chapter_Orbital_graphs.xml:80-88
-gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
-"D8"
-gap> OrbitalGraphs(D8);
-[ <self-paired orbital graph of D8 with base-pair 
-    [ 1, 3 ] and vertices [ 1 .. 4 ]>, 
-  <self-paired orbital graph of D8 with base-pair 
-    [ 1, 2 ] and vertices [ 1 .. 4 ]> ]
-
 # doc/_Chapter_Orbital_graphs.xml:102-105
 gap> true;
 true
