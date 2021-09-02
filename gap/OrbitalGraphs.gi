@@ -1,5 +1,5 @@
 #
-# OrbitalGraphs: Computations with Orbital Graphs
+# OrbitalGraphs: Computations with orbital graphs
 #
 # Implementations
 #
