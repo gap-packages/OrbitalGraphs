@@ -201,3 +201,47 @@ InstallMethod(IsSymmetricDigraph, "for an orbital graph of a group",
 
 InstallMethod(IsSelfPaired, "for an orbital graph",
 [IsOrbitalGraph], IsSymmetricDigraph);
+
+
+# TODO Make sure that I am doing the appropriate GAP-like thing
+InstallMethod(ViewString, "for an orbital graph",
+[IsOrbitalGraph],
+function(D)
+    local G, list_vertices, str;
+
+    list_vertices := IsRange(DigraphVertices(D)) or DigraphNrVertices(D) < 10;
+    if IsOrbitalGraphOfGroup(D) then
+        G := UnderlyingGroup(D);
+    elif IsOrbitalGraphOfSemigroup(D) then
+        G := UnderlyingSemigroup(D);
+    else
+        ErrorNoReturn("Unknown kind of orbital graph! ",
+                      "No known underlying group or semigroup");
+    fi;
+
+    str := "<";
+    if IsSelfPaired(D) then
+        Append(str, "self-paired ");
+    fi;
+    Append(str, "orbital graph of ");
+    if HasName(G) then
+        Append(str, Name(G));
+    elif HasStructureDescription(G) then
+        Append(str, StructureDescription(G));
+    else
+        Append(str, ViewString(G));
+    fi;
+    if not list_vertices then
+        Append(str, " on ");
+        Append(str, String(DigraphNrVertices(D)));
+        Append(str, " vertices");
+    fi;
+    Append(str, " with base-pair ");
+    Append(str, ViewString(BasePair(D)));
+    if list_vertices then
+        Append(str, " and vertices ");
+        Append(str, PrintString(DigraphVertices(D)));
+    fi;
+    Append(str, ">");
+    return str;
+end);

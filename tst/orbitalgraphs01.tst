@@ -10,19 +10,28 @@
 #
 gap> START_TEST("orbitalgraphs01.tst");
 
-# doc/_Chapter_Orbital_graphs.xml:115-118
+# doc/_Chapter_Orbital_graphs.xml:80-88
+gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
+"D8"
+gap> OrbitalGraphs(D8);
+[ <self-paired orbital graph of D8 with base-pair 
+    [ 1, 3 ] and vertices [ 1 .. 4 ]>, 
+  <self-paired orbital graph of D8 with base-pair 
+    [ 1, 2 ] and vertices [ 1 .. 4 ]> ]
+
+# doc/_Chapter_Orbital_graphs.xml:119-122
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:134-137
+# doc/_Chapter_Orbital_graphs.xml:138-141
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:153-156
+# doc/_Chapter_Orbital_graphs.xml:157-160
 gap> true;
 true
 
-# doc/_Chapter_Orbital_graphs.xml:185-197
+# doc/_Chapter_Orbital_graphs.xml:189-201
 gap> OrbitalClosure(PSL(2,5)) = SymmetricGroup(6);
 true
 gap> C6 := CyclicGroup(IsPermGroup, 6);;
@@ -35,7 +44,7 @@ gap> IsConjugate(SymmetricGroup(6),
 >                closure, WreathProduct(Group([(1,2)]), Group([(1,2,3)])));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:213-222
+# doc/_Chapter_Orbital_graphs.xml:217-226
 gap> OrbitalIndex(PSL(2,5));
 12
 gap> OrbitalIndex(PGL(2,5));
@@ -45,7 +54,7 @@ gap> OrbitalIndex(AlternatingGroup(6));
 gap> OrbitalIndex(DihedralGroup(IsPermGroup, 6));
 1
 
-# doc/_Chapter_Orbital_graphs.xml:249-256
+# doc/_Chapter_Orbital_graphs.xml:253-260
 gap> IsOrbitalGraphRecognisable(QuaternionGroup(IsPermGroup, 8));
 true
 gap> IsOGR(AlternatingGroup(8));
@@ -53,7 +62,7 @@ false
 gap> IsOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:280-287
+# doc/_Chapter_Orbital_graphs.xml:284-291
 gap> IsStronglyOrbitalGraphRecognisable(CyclicGroup(IsPermGroup, 8));
 true
 gap> IsStronglyOGR(QuaternionGroup(IsPermGroup, 8));
@@ -61,7 +70,7 @@ false
 gap> IsStronglyOGR(TrivialGroup(IsPermGroup));
 true
 
-# doc/_Chapter_Orbital_graphs.xml:311-318
+# doc/_Chapter_Orbital_graphs.xml:315-322
 gap> IsAbsolutelyOrbitalGraphRecognisable(DihedralGroup(IsPermGroup, 8));
 true
 gap> IsAbsolutelyOGR(CyclicGroup(IsPermGroup, 8));

@@ -64,17 +64,21 @@ DeclareCategory("IsOrbitalGraphOfSemigroup", IsOrbitalGraph);
 #!   The order of the returned list is not specified.
 DeclareAttribute("OrbitalGraphs", IsPermGroup);
 #! @Arguments S
-#! @BeginLogSession
-#! gap> OrbitalGraphs(DihedralGroup(IsPermGroup, 8));
-#! [ <immutable digraph with 4 vertices, 4 edges>, 
-#!   <immutable digraph with 4 vertices, 8 edges> ]
-#! @EndLogSession
 DeclareAttribute("OrbitalGraphs", IsTransformationSemigroup);
 #! @Arguments G, vertices
 DeclareOperation("OrbitalGraphs", [IsPermGroup, IsHomogeneousList]);
 #! @EndGroup
 #! @Group orbitals
 #! @Arguments G, max
+#! @BeginExampleSession
+#! gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
+#! "D8"
+#! gap> OrbitalGraphs(D8);
+#! [ <self-paired orbital graph of D8 with base-pair 
+#!     [ 1, 3 ] and vertices [ 1 .. 4 ]>, 
+#!   <self-paired orbital graph of D8 with base-pair 
+#!     [ 1, 2 ] and vertices [ 1 .. 4 ]> ]
+#! @EndExampleSession
 DeclareOperation("OrbitalGraphs", [IsPermGroup, IsPosInt]);
 
 
