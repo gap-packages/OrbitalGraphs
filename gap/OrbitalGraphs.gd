@@ -53,25 +53,29 @@ DeclareCategory("IsOrbitalGraphOfSemigroup", IsOrbitalGraph);
 
 # TODO: Give a definition of orbital graphs
 # TODO: Implement constructing the orbital graph with a given base pair
-# TODO: Implement allowing the set of points (vertices) to be specified
+# TODO Document allowing the set of points (vertices) to be specified
 #! @BeginGroup orbitals
 #! @Arguments G
 #! @Returns A list of orbital graphs
 #! @Description
-#!   This attribute is a list of all orbital graphs of the permutation group
+#!   This returns a list of all orbital graphs of the permutation group
 #!   <A>G</A> or transformation semigroup <A>S</A>.
 #!
 #!   The order of the returned list is not specified.
 DeclareAttribute("OrbitalGraphs", IsPermGroup);
-#! @EndGroup
 #! @Arguments S
-#! @Group orbitals
 #! @BeginLogSession
 #! gap> OrbitalGraphs(DihedralGroup(IsPermGroup, 8));
 #! [ <immutable digraph with 4 vertices, 4 edges>, 
 #!   <immutable digraph with 4 vertices, 8 edges> ]
 #! @EndLogSession
 DeclareAttribute("OrbitalGraphs", IsTransformationSemigroup);
+#! @Arguments G, vertices
+DeclareOperation("OrbitalGraphs", [IsPermGroup, IsHomogeneousList]);
+#! @EndGroup
+#! @Group orbitals
+#! @Arguments G, max
+DeclareOperation("OrbitalGraphs", [IsPermGroup, IsPosInt]);
 
 
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);

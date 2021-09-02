@@ -5,6 +5,19 @@
 #
 # Implementations
 
+
+## Constructing orbital graphs
+
+# Permutation groups
+
+InstallMethod(OrbitalGraphs, "for a permutation group",
+[IsPermGroup],
+{G} -> OrbitalGraphs(G, MovedPoints(G)));
+
+InstallMethod(OrbitalGraphs, "for a permutation group and a pos int",
+[IsPermGroup, IsPosInt],
+{G, n} -> OrbitalGraphs(G, [1 .. n]));
+
 # The code below is essentially stolen from ferret;
 #       Do we want to give a naive version that
 #       just computes all orbital graphs, one that only
@@ -12,15 +25,25 @@
 #       and a version that gives the ones actually used in
 #       backtrack?
 #
-InstallMethod( OrbitalGraphs, "for a permutation group"
-             , [ IsPermGroup ],
-function(G)
+InstallMethod(OrbitalGraphs, "for a permutation group and a homogeneous list",
+[IsPermGroup, IsHomogeneousList],
+function(G, points)
     local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes, D,
-          orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, lmp, moved;
+          orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, maxval, moved;
 
-    # FIXME: Add option for specifying which points we select base pairs from
-    moved := MovedPoints(G);
-    lmp := LargestMovedPoint(G);
+    if not ForAll(points, IsPosInt) then
+        ErrorNoReturn("the second argument <points> must be a list of ",
+                      "positive integers");
+    fi;
+    points := Set(points);
+    maxval := Maximum(points);
+    if not (maxval >= LargestMovedPoint(G) or
+            ForAll(GeneratorsOfGroup(G), g -> OnSets(points, g) = points)) then
+        ErrorNoReturn("the second argument <points> must be fixed setwise ",
+                      "by the first argument <G>");
+    elif IsTrivial(G) then
+        return [];
+    fi;
 
     fillRepElts := function(G, orb)
         local val, g, reps, buildorb, gens;
@@ -40,6 +63,7 @@ function(G)
     end;
 
     graphlist := [];
+    moved := Intersection(points, MovedPoints(G));
     orbitsG := Orbits(G, moved);
 
     orbsizes := [];
@@ -64,7 +88,7 @@ function(G)
         for iorb in innerorblist[i] do
             if not(orb[1] = iorb[1] and Size(iorb) = 1)
             then
-                graph := List([1..lmp], x -> []);
+                graph := List([1..maxval], x -> []);
                 if IsEmpty(orbreps) then
                     orbreps := fillRepElts(G, orb);
                 fi;
