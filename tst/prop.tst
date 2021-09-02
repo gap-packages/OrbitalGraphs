@@ -46,4 +46,22 @@ gap> S := Semigroup(Transformation([1,1,1]), Transformation([3,3,3]));;
 gap> OrbitalGraphs(S);;
 
 #
+gap> G := Group(GeneratorsOfGroup(SymmetricGroup(20)));;
+gap> IsOGR(G);
+true
+gap> IsStronglyOGR(G);
+true
+gap> IsAbsolutelyOGR(G);
+true
+
+#
+gap> G := Group(GeneratorsOfGroup(AlternatingGroup(20)));;
+gap> IsOGR(G);
+false
+gap> IsStronglyOGR(G);
+false
+gap> IsAbsolutelyOGR(G);
+false
+
+#
 gap> STOP_TEST("OrbitalGraphs package: prop.tst", 0);

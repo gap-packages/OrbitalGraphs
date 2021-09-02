@@ -79,23 +79,26 @@ function(G)
     return MakeImmutable(graphlist);
 end);
 
-InstallMethod( OrbitalClosure, "for a permutation group",
-               [ IsPermGroup ],
-G -> Intersection(List(OrbitalGraphs(G), AutomorphismGroup)) );
-# TODO: TwoClosure as implemented by Heiko Theißen requires the group
-#       to be transitive.
-# H := TwoClosure(G);
+InstallMethod(OrbitalClosure, "for a permutation group",
+[IsPermGroup],
+function(G)
+    if IsTrivial(G) then
+        return G;
+    fi;
+    return Intersection(List(OrbitalGraphs(G), AutomorphismGroup));
+end);
 
 InstallMethod( IsOrbitalGraphRecognisable, "for a permutation group",
                [ IsPermGroup ],
 function(G)
-    # it holds that G <= OrbitalClosure(G), hence
-    # testing for size is sufficient
-    return Size(OrbitalClosure(G)) = Size(G);
+    if IsTransitive(G) and Transitivity(G) > 1 then
+        return IsNaturalSymmetricGroup(G);
+    fi;
+    # it holds that G <= OrbitalClosure(G), so testing for size is sufficient
+    return Size(G) = Size(OrbitalClosure(G));
 end);
 
-InstallTrueMethod(IsOrbitalGraphRecognisable,
-                  IsStronglyOrbitalGraphRecognisable);
+InstallTrueMethod(IsOGR, IsStronglyOGR);
 
 InstallMethod( OrbitalIndex, "for a permutation group",
                [ IsPermGroup ],
@@ -106,19 +109,26 @@ end);
 InstallMethod( IsStronglyOrbitalGraphRecognisable, "for a permutation group",
                [ IsPermGroup ],
 function(G)
-    # TODO check that this is right.
-    return ForAny(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
+    if IsTransitive(G) and Transitivity(G) > 1 then
+        return IsNaturalSymmetricGroup(G);
+    fi;
+    return IsTrivial(G) or
+           ForAny(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
 
-InstallTrueMethod(IsStronglyOrbitalGraphRecognisable,
-                  IsAbsolutelyOrbitalGraphRecognisable);
+InstallTrueMethod(IsStronglyOGR, IsAbsolutelyOGR);
 
 InstallMethod( IsAbsolutelyOrbitalGraphRecognisable, "for a permutation group",
                [ IsPermGroup ],
 function(G)
-    # TODO check that this is right.
+    if IsTransitive(G) and Transitivity(G) > 1 then
+        return IsNaturalSymmetricGroup(G);
+    fi;
     return ForAll(OrbitalGraphs(G), x -> Size(G) = Size(AutomorphismGroup(x)));
 end);
+
+InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsNaturalSymmetricGroup);
+InstallTrueMethod(IsAbsolutelyOGR, IsPermGroup and IsTrivial);
 
 
 # Transformation Semigroups

@@ -46,5 +46,16 @@ gap> G := Group([(1,2)(3,4), (1,3)(2,4)]);;
 gap> Set(OrbitalGraphs(G), Graph6String);
 [ "CK", "CQ", "C`" ]
 
+# Trivial group
+gap> trivial := TrivialGroup(IsPermGroup);;
+gap> OrbitalClosure(TrivialGroup(IsPermGroup)) = trivial;
+true
+gap> IsOGR(TrivialGroup(IsPermGroup));
+true
+gap> IsStronglyOGR(TrivialGroup(IsPermGroup));
+true
+gap> IsAbsolutelyOGR(TrivialGroup(IsPermGroup));
+true
+
 #
 gap> STOP_TEST("OrbitalGraphs package: orbitalgraphs.tst", 0);
