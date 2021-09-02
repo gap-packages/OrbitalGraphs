@@ -132,9 +132,14 @@ end);
 InstallMethod(OrbitalGraphs, "for a transformation semigroup",
 [IsTransformationSemigroup],
 function(S)
-    # TODO: This is currently super-naive
-    local bpts;
+    # FIXME This is currently super-naive
+    local bpts, out, D, x;
 
     bpts := Arrangements([1..LargestMovedPoint(S)], 2);
-    return List(bpts, x -> DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples)))));
+    out := [];
+    for x in bpts do
+      D := DigraphByEdges(AsList(Enumerate(Orb(S, x, OnTuples))));
+      AddSet(out, D);
+    od;
+    return out;
 end);
