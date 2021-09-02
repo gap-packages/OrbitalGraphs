@@ -164,9 +164,16 @@ function(S)
     return out;
 end);
 
+
+## Attributes and properties of individual orbital graphs
+
+
 # TODO Is it possible to cleverly determine this at creation?
 # I guess we can set it to be false if we know that the points of the base pair
 # are in different orbits?
 InstallMethod(IsSymmetricDigraph, "for an orbital graph of a group",
 [IsOrbitalGraphOfGroup],
 {D} -> IsDigraphEdge(D, Reversed(BasePair(D))));
+
+InstallMethod(IsSelfPaired, "for an orbital graph",
+[IsOrbitalGraph], IsSymmetricDigraph);

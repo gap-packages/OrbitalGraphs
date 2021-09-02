@@ -256,3 +256,11 @@ DeclareSynonymAttr("IsStronglyOGR", IsStronglyOrbitalGraphRecognisable);
 DeclareProperty("IsAbsolutelyOrbitalGraphRecognisable", IsPermGroup);
 # TODO: When AutoDoc supports it, this should be properly linked into the doc:
 DeclareSynonymAttr("IsAbsolutelyOGR", IsAbsolutelyOrbitalGraphRecognisable);
+
+
+#! @Section Attributes and properties of individual orbital graphs
+
+
+#TODO document
+#!
+DeclareProperty("IsSelfPaired", IsOrbitalGraph);
