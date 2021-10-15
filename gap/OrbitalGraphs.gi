@@ -48,8 +48,6 @@ function(G, points)
             ForAll(GeneratorsOfGroup(G), g -> OnSets(points, g) = points)) then
         ErrorNoReturn("the second argument <points> must be fixed setwise ",
                       "by the first argument <G>");
-    elif IsTrivial(G) then
-        return [];
     fi;
 
     fillRepElts := function(G, orb)

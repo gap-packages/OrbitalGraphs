@@ -30,9 +30,6 @@ DeclareCategory("IsOrbitalGraph", IsDigraph);
 #!   <Ref Filt="IsOrbitalGraphOfGroup" Label="for IsOrbitalGraph"/>,
 #!   which is a subcategory of
 #!   <Ref Filt="IsOrbitalGraph" Label="for IsDigraph"/>.
-#!
-#!   This makes it easy to recognise orbital graphs that were created
-#!   from groups with this package.
 DeclareCategory("IsOrbitalGraphOfGroup", IsOrbitalGraph);
 
 #! @Arguments D
@@ -42,9 +39,6 @@ DeclareCategory("IsOrbitalGraphOfGroup", IsOrbitalGraph);
 #!   <Ref Filt="IsOrbitalGraphOfGroup" Label="for IsOrbitalGraph"/>,
 #!   which is a subcategory of
 #!   <Ref Filt="IsOrbitalGraph" Label="for IsDigraph"/>.
-#!
-#!   This makes it easy to recognise orbital graphs that were created
-#!   from semigroups with this package.
 DeclareCategory("IsOrbitalGraphOfSemigroup", IsOrbitalGraph);
 
 
