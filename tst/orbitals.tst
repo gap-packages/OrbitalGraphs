@@ -56,6 +56,23 @@ gap> IsStronglyOGR(TrivialGroup(IsPermGroup));
 true
 gap> IsAbsolutelyOGR(TrivialGroup(IsPermGroup));
 true
+gap> OrbitalGraphs(TrivialGroup(IsPermGroup));  # Issue 38
+[  ]
+gap> OrbitalGraphs(TrivialGroup(IsPermGroup), 0);
+[  ]
+gap> OrbitalGraphs(TrivialGroup(IsPermGroup), 1);
+[  ]
+gap> OrbitalGraphs(TrivialGroup(IsPermGroup), []);
+[  ]
+
+# OrbitalGraphs: Error checking
+gap> OrbitalGraphs(SymmetricGroup(3), -1);
+Error, the second argument <n> must be a nonnegative integer
+gap> OrbitalGraphs(SymmetricGroup(3), [-1, 1]);
+Error, the second argument <points> must be a list of positive integers
+gap> OrbitalGraphs(SymmetricGroup(3), [2, 1]);
+Error, the second argument <points> must be fixed setwise by the first argumen\
+t <G>
 
 #
 gap> STOP_TEST("OrbitalGraphs package: orbitalgraphs.tst", 0);
