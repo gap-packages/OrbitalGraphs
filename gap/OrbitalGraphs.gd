@@ -77,7 +77,7 @@ DeclareOperation("OrbitalGraphs", [IsPermGroup, IsHomogeneousList]);
 #!     , <self-paired orbital graph of D8 on 4 vertices 
 #!     with base-pair (1,2), 8 arcs> ]
 #! @EndExampleSession
-DeclareOperation("OrbitalGraphs", [IsPermGroup, IsPosInt]);
+DeclareOperation("OrbitalGraphs", [IsPermGroup, IsInt]);
 
 
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);

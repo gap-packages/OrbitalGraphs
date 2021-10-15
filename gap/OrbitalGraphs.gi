@@ -14,9 +14,14 @@ InstallMethod(OrbitalGraphs, "for a permutation group",
 [IsPermGroup],
 {G} -> OrbitalGraphs(G, MovedPoints(G)));
 
-InstallMethod(OrbitalGraphs, "for a permutation group and a pos int",
-[IsPermGroup, IsPosInt],
-{G, n} -> OrbitalGraphs(G, [1 .. n]));
+InstallMethod(OrbitalGraphs, "for a permutation group and an int",
+[IsPermGroup, IsInt],
+function(G, n)
+    if n < 0 then
+        ErrorNoReturn("the second argument <n> must be a nonnegative integer");
+    fi;
+    return OrbitalGraphs(G, [1 .. n]);
+end);
 
 # The code below is essentially stolen from ferret;
 #       Do we want to give a naive version that
@@ -31,7 +36,9 @@ function(G, points)
     local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes, D,
           orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, maxval, moved;
 
-    if not ForAll(points, IsPosInt) then
+    if IsEmpty(points) then
+        return [];
+    elif not ForAll(points, IsPosInt) then
         ErrorNoReturn("the second argument <points> must be a list of ",
                       "positive integers");
     fi;
