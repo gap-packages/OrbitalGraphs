@@ -6,5 +6,5 @@
 # Reading the implementation part of the package.
 
 ReadPackage("OrbitalGraphs", "gap/OrbitalGraphs.gi");
+ReadPackage("OrbitalGraphs", "gap/display.gi");
 ReadPackage("OrbitalGraphs", "gap/util.g");
-
