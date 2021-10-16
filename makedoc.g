@@ -19,3 +19,5 @@ AutoDoc( rec(
         gap_root_relative_path := true,
     ),
 ) );
+
+QUIT;
