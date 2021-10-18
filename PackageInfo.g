@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "OrbitalGraphs",
 Subtitle := "Computations with orbital graphs in GAP",
-Version := "0.1.1",
-Date := "02/09/2021", # dd/mm/yyyy format
+Version := "0.1.2",
+Date := "01/02/2022", # dd/mm/yyyy format
 License := "MPL-2.0",
 
 Persons := [
@@ -90,9 +90,9 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.8.2",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ]
-                         , [ "Digraphs", ">= 0.12.1"]
+  GAP := ">=4.11.0",
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.6.3" ]
+                         , [ "Digraphs", ">= 1.1.1"]
 # We do not really need ferret, only for intersections
 # of automorphism groups
 #                         , [ "ferret", ">= 0.0" ]
