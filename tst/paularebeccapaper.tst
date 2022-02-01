@@ -1,3 +1,5 @@
+#@local G
+#
 # Examples from "Questions on Orbital Graphs"
 # by Paula Hähndel and Rebecca Waldecker
 #

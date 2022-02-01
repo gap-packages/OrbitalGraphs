@@ -1,4 +1,4 @@
-#
+#@local G, o
 gap> START_TEST("OrbitalGraphs package: display.tst");
 gap> LoadPackage("orbitalgraphs", false);;
 

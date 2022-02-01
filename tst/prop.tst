@@ -1,4 +1,4 @@
-#
+#@local G, S
 gap> START_TEST("OrbitalGraphs package: prop.tst");
 gap> LoadPackage("orbitalgraphs", false);;
 

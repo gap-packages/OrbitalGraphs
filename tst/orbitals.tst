@@ -1,14 +1,14 @@
-#
+#@local S50product, orbitals, G, trivial
 gap> START_TEST("OrbitalGraphs package: orbitalgraphs.tst");
 gap> LoadPackage("orbitalgraphs", false);;
 
 # Issue 19
-gap> graphs := OrbitalGraphs(Group([(3,4), (5,6)]));;
-gap> Length(graphs);
+gap> orbitals := OrbitalGraphs(Group([(3,4), (5,6)]));;
+gap> Length(orbitals);
 4
-gap> Set(graphs, x -> Minimum(DigraphEdges(x)));
+gap> Set(orbitals, x -> Minimum(DigraphEdges(x)));
 [ [ 3, 4 ], [ 3, 5 ], [ 5, 3 ], [ 5, 6 ] ]
-gap> Number(graphs, IsSymmetricDigraph);
+gap> Number(orbitals, IsSymmetricDigraph);
 2
 
 # S50product: disjoint S50 x C2 x C2 x S50 x C2 x C2 x D8 on [3 .. 114]
