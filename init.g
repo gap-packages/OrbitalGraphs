@@ -5,4 +5,4 @@
 #
 # Reading the declaration part of the package.
 
-ReadPackage( "OrbitalGraphs", "gap/OrbitalGraphs.gd");
+ReadPackage("OrbitalGraphs", "gap/OrbitalGraphs.gd");
