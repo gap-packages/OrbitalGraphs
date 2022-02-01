@@ -77,21 +77,42 @@ DeclareOperation("OrbitalGraphs", [IsPermGroup, IsInt]);
 #DeclareAttribute("OrbitalGraphsRepresentative", IsPermGroup);
 
 
-# TODO: Implement constructing the orbital graph with a given base pair
+# TODO Once orbital graphs can be defined on arbitrary vertices:
+# * Allow specifying a set of points rather than a pos int k.
+# * Implement a 2-arg version with MovedPoints(G) taken as the third arg.
 #! @BeginGroup orbital
 #! @Returns An orbital graph
-#! @Arguments G, u, v
+#! @Arguments G, basepair, k
 #! @Description
-#!   TODO.
-DeclareOperation("OrbitalGraph", [IsPermGroup, IsPosInt, IsPosInt]);
+#!   If <A>G</A> is a permutation group, <A>basepair</A> is a pair of
+#!   positive integers, and `k` is a positive integer such that `[1..<A>k</A>]`
+#!   is preserved by <A>G</A> and contains the entries of <A>basepair</A>,
+#!   then this function returns the orbital graph of <A>G</A> with the given
+#!   <A>basepair</A>, on the vertices `[1..<A>k</A>]`.
+#!
+#!   The resulting orbital graph will have <A>basepair</A> set as its
+#!   <Ref Attr="BasePair" Label="for IsOrbitalGraph"/> attribute.
 #! @EndGroup
 #! @Group orbital
-#! @Arguments G, basepair
 #! @BeginExampleSession
-#! gap> true;
-#! true
+#! gap> D8 := DihedralGroup(IsPermGroup, 8);
+#! Group([ (1,2,3,4), (2,4) ])
+#! gap> OrbitalGraph(D8, [1, 3], 4);
+#! <self-paired orbital graph of Group([ (1,2,3,4), (2,4) ]) on 4 vertices 
+#! with base-pair (1,3), 4 arcs>
+#! gap> OrbitalGraph(D8, [1, 3], 5);
+#! <self-paired orbital graph of Group([ (1,2,3,4), (2,4) ]) on 5 vertices 
+#! with base-pair (1,3), 4 arcs>
+#! gap> G := Group([ (1,2)(3,4) ]);;
+#! gap> OrbitalGraph(G, [1, 2], 2);
+#! <self-paired orbital graph of Group([ (1,2)(3,4) ]) on 2 vertices 
+#! with base-pair (1,2), 2 arcs>
 #! @EndExampleSession
-DeclareOperation("OrbitalGraph", [IsPermGroup, IsHomogeneousList]);
+DeclareOperation("OrbitalGraph", [IsPermGroup, IsHomogeneousList, IsPosInt]);
+#@Arguments G, basepair, points
+#DeclareOperation("OrbitalGraph", [IsPermGroup, IsHomogeneousList, IsHomogeneousList]);
+#@Arguments G, basepair
+#DeclareOperation("OrbitalGraph", [IsPermGroup, IsHomogeneousList]);
 
 
 #! @Section Information stored about orbital graphs at creation

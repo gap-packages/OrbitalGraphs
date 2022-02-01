@@ -1,4 +1,4 @@
-#@local S50product, orbitals, G, trivial
+#@local S50product, orbitals, G, trivial, x
 gap> START_TEST("OrbitalGraphs package: orbitalgraphs.tst");
 gap> LoadPackage("orbitalgraphs", false);;
 
@@ -73,6 +73,37 @@ Error, the second argument <points> must be a list of positive integers
 gap> OrbitalGraphs(SymmetricGroup(3), [2, 1]);
 Error, the second argument <points> must be fixed setwise by the first argumen\
 t <G>
+
+# OrbitalGraph: Error checking
+gap> G := DihedralGroup(IsPermGroup, 8);;
+gap> OrbitalGraph(G, [0, 1], 4);
+Error, the second argument <basepair> must be a pair of positive integers
+gap> OrbitalGraph(G, [1, 1], 3);
+Error, the third argument <k> must be such that [1..k] contains the entries of\
+ <basepair> and is preserved by G
+gap> x := OrbitalGraph(G, [1, 5], 4);
+Error, the third argument <k> must be such that [1..k] contains the entries of\
+ <basepair> and is preserved by G
+gap> x := OrbitalGraph(G, [1, 1], 4);
+<self-paired orbital graph of Group([ (1,2,3,4), (2,4) ]) on 4 vertices 
+with base-pair (1,1), 4 arcs>
+gap> DigraphEdges(x);
+[ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ], [ 4, 4 ] ]
+gap> x := OrbitalGraph(G, [2, 1], 4);
+<self-paired orbital graph of Group([ (1,2,3,4), (2,4) ]) on 4 vertices 
+with base-pair (2,1), 8 arcs>
+gap> DigraphEdges(x);
+[ [ 1, 2 ], [ 1, 4 ], [ 2, 1 ], [ 2, 3 ], [ 3, 2 ], [ 3, 4 ], [ 4, 1 ], 
+  [ 4, 3 ] ]
+gap> x := OrbitalGraph(G, [3, 1], 5);
+<self-paired orbital graph of Group([ (1,2,3,4), (2,4) ]) on 5 vertices 
+with base-pair (3,1), 4 arcs>
+gap> DigraphEdges(x);
+[ [ 1, 3 ], [ 2, 4 ], [ 3, 1 ], [ 4, 2 ] ]
+gap> OrbitalGraphs(G) =
+>   List(OrbitalGraphs(G),
+>        x -> OrbitalGraph(G, BasePair(x), LargestMovedPoint(G)));
+true
 
 #
 gap> STOP_TEST("OrbitalGraphs package: orbitalgraphs.tst", 0);

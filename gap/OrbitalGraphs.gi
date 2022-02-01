@@ -114,6 +114,31 @@ function(G, points)
 end);
 
 
+# Individual orbital graphs
+
+InstallMethod(OrbitalGraph,
+"for a permutation group, homogeneous list, and pos int",
+[IsPermGroup, IsHomogeneousList, IsPosInt],
+function(G, basepair, k)
+  local D;
+    if not (Length(basepair) = 2 and ForAll(basepair, IsPosInt)) then
+        ErrorNoReturn("the second argument <basepair> must be a pair of ",
+                      "positive integers");
+    elif basepair[1] > k or basepair[2] > k or
+      ForAny(GeneratorsOfGroup(G), g -> ForAny([1 .. k], i -> i ^ g > k)) then
+        ErrorNoReturn("the third argument <k> must be such that [1..k] ",
+                      "contains the entries of <basepair> and is preserved ",
+                      "by G");
+    fi;
+
+    D := EdgeOrbitsDigraph(G, basepair, k);
+    SetFilterObj(D, IsOrbitalGraphOfGroup);
+    SetUnderlyingGroup(D, G);
+    SetBasePair(D, basepair);
+    return D;
+end);
+
+
 # Transformation semigroups
 
 InstallMethod(OrbitalGraphs, "for a transformation semigroup",
