@@ -23,12 +23,11 @@ function(G, n)
     return OrbitalGraphs(G, [1 .. n]);
 end);
 
-# The code below is essentially stolen from ferret;
-#       Do we want to give a naive version that
-#       just computes all orbital graphs, one that only
-#       gives a representative in the isomorphism class,
-#       and a version that gives the ones actually used in
-#       backtrack?
+# The code below was originally essentially stolen from ferret.
+# Do we want to give different versions of this:
+#   a naive version that just computes all orbital graphs,
+#   a version that only gives a representative in the isomorphism class, and
+#   a version that gives the ones actually used in backtrack?
 #
 InstallMethod(OrbitalGraphs, "for a permutation group and a homogeneous list",
 [IsPermGroup, IsHomogeneousList],
@@ -71,7 +70,9 @@ function(G, points)
     moved := Intersection(points, MovedPoints(G));
     orbitsG := Orbits(G, moved);
 
+    # FIXME: Currently unused
     orbsizes := [];
+    # FIXME: Currently unused
     orbpos := [];
 
     # Efficently store size of orbits of values
@@ -83,15 +84,16 @@ function(G, points)
     od;
 
     innerorblist := List(orbitsG, o -> Orbits(Stabilizer(G, o[1]), moved));
+    # FIXME: Currently unused
     orbitsizes := List([1..Length(orbitsG)],
                        x -> List(innerorblist[x], y -> Size(orbitsG[x])*Size(y)));
 
-    for i in [1..Size(orbitsG)] do
+    for i in [1..Length(orbitsG)] do
         orb := orbitsG[i];
         orbreps := [];
 
         for iorb in innerorblist[i] do
-            if not(orb[1] = iorb[1] and Size(iorb) = 1)
+            if not (Size(iorb) = 1 and orb[1] = iorb[1]) # No loopy orbitals
             then
                 graph := List([1..maxval], x -> []);
                 if IsEmpty(orbreps) then
@@ -103,11 +105,10 @@ function(G, points)
                 od;
                 D := Digraph(graph);
                 SetUnderlyingGroup(D, G);
-                Add(graphlist, D);
+                AddSet(graphlist, D);
             fi;
         od;
     od;
-    Sort(graphlist);
     Perform(graphlist, function(x) SetFilterObj(x, IsOrbitalGraphOfGroup); end);
     return graphlist;
 end);
@@ -162,9 +163,7 @@ end);
 
 
 InstallMethod(OrbitalIndex, "for a permutation group", [IsPermGroup],
-function(G)
-    return Index(OrbitalClosure(G), G);
-end);
+{G} -> Index(OrbitalClosure(G), G));
 
 
 ## Recognising a group from its orbital graphs
