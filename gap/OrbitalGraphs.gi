@@ -10,8 +10,7 @@
 
 # Permutation groups
 
-InstallMethod(OrbitalGraphs, "for a permutation group",
-[IsPermGroup],
+InstallMethod(OrbitalGraphs, "for a permutation group", [IsPermGroup],
 {G} -> OrbitalGraphs(G, MovedPoints(G)));
 
 InstallMethod(OrbitalGraphs, "for a permutation group and an int",
@@ -23,11 +22,10 @@ function(G, n)
     return OrbitalGraphs(G, [1 .. n]);
 end);
 
-# The code below was originally essentially stolen from ferret.
-# Do we want to give different versions of this:
-#   a naive version that just computes all orbital graphs,
-#   a version that only gives a representative in the isomorphism class, and
-#   a version that gives the ones actually used in backtrack?
+# The code below is essentially stolen from ferret; do we want to give:
+#     * a naive version that just computes all orbital graphs
+#     * a version one that only gives a representative in the isomorphism class
+#     * a version that gives the ones actually used in backtrack?
 #
 InstallMethod(OrbitalGraphs, "for a permutation group and a homogeneous list",
 [IsPermGroup, IsHomogeneousList],
@@ -48,6 +46,7 @@ function(G, points)
         ErrorNoReturn("the second argument <points> must be fixed setwise ",
                       "by the first argument <G>");
     fi;
+    moved := Intersection(points, MovedPoints(G));
 
     fillRepElts := function(G, orb)
         local val, g, reps, buildorb, gens;
@@ -57,17 +56,15 @@ function(G, points)
         gens := GeneratorsOfGroup(G);
         for val in buildorb do
             for g in gens do
-                if not IsBound(reps[val^g]) then
-                    reps[val^g] := reps[val] * g;
-                    Add(buildorb, val^g);
+                if not IsBound(reps[val ^ g]) then
+                    reps[val ^ g] := reps[val] * g;
+                    Add(buildorb, val ^ g);
                 fi;
             od;
         od;
         return reps;
     end;
 
-    graphlist := [];
-    moved := Intersection(points, MovedPoints(G));
     orbitsG := Orbits(G, moved);
 
     # FIXME: Currently unused
@@ -76,19 +73,20 @@ function(G, points)
     orbpos := [];
 
     # Efficently store size of orbits of values
-    for orb in [1..Length(orbitsG)] do
+    for orb in [1 .. Length(orbitsG)] do
         for i in orbitsG[orb] do
-            orbsizes[i] := Size(orbitsG[orb]);
+            orbsizes[i] := Length(orbitsG[orb]);
             orbpos[i] := orb;
         od;
     od;
 
     innerorblist := List(orbitsG, o -> Orbits(Stabilizer(G, o[1]), moved));
     # FIXME: Currently unused
-    orbitsizes := List([1..Length(orbitsG)],
-                       x -> List(innerorblist[x], y -> Size(orbitsG[x])*Size(y)));
+    orbitsizes := List([1 .. Length(orbitsG)],
+                       x -> List(innerorblist[x], y -> Length(orbitsG[x]) * Length(y)));
 
-    for i in [1..Length(orbitsG)] do
+    graphlist := [];
+    for i in [1 .. Length(orbitsG)] do
         orb := orbitsG[i];
         orbreps := [];
 

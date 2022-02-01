@@ -22,6 +22,8 @@ gap> S50product := Group(
 >   (107,108), (109,110), (111,112,113,114), (112,114) ] );
 <permutation group with 10 generators>
 gap> orbitals := OrbitalGraphs(S50product);;
+gap> Length(orbitals);
+50
 gap> ForAll(orbitals, D -> IsDigraph(D) and DigraphNrVertices(D) = 114);
 true
 gap> List(orbitals, DigraphNrEdges);
