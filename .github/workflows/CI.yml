@@ -8,7 +8,7 @@ on:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-branch }}
+    name: GAP ${{ matrix.gap-branch }} ${{ matrix.name }}
     runs-on: ubuntu-latest
     # Don't run this twice on PRs for branches pushed to the same repository
     if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
@@ -18,12 +18,19 @@ jobs:
         gap-branch:
           - master
           - stable-4.11
+        pkgs-to-clone:
+          - ""
+        include:
+          - name: "/ Digraphs master"
+            gap-branch: master
+            pkgs-to-clone: "digraphs/digraphs"
 
     steps:
       - uses: actions/checkout@v2
       - uses: gap-actions/setup-gap@v2
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
+          GAP_PKGS_TO_CLONE: ${{ matrix.pkgs-to-clone }}
           GAP_PKGS_TO_BUILD: "io profiling orb digraphs grape datastructures"
       - uses: gap-actions/build-pkg@v1
       - uses: gap-actions/run-pkg-tests@v2
