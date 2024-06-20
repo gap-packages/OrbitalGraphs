@@ -14,9 +14,9 @@ gap> START_TEST("orbitalgraphs01.tst");
 gap> D8 := Group([ (1,2,3,4), (2,4) ]);; StructureDescription(D8);
 "D8"
 gap> OrbitalGraphs(D8);
-[ <self-paired orbital graph of D8 on 4 vertices with base-pair (1,3), 4 arcs>
+[ <self-paired orbital graph of D8 on 4 vertices with base-pair (1,2), 8 arcs>
     , <self-paired orbital graph of D8 on 4 vertices 
-    with base-pair (1,2), 8 arcs> ]
+    with base-pair (1,3), 4 arcs> ]
 
 # doc/_Chapter_Orbital_graphs.xml:101-114
 gap> D8 := DihedralGroup(IsPermGroup, 8);
