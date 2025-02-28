@@ -10,6 +10,8 @@
 
 # Permutation groups
 
+# FIXME: Currently, if ValueOptions are set, then this can set the wrong value
+# of this attribute!
 InstallMethod(OrbitalGraphs, "for a permutation group", [IsPermGroup],
 {G} -> OrbitalGraphs(G, MovedPoints(G)));
 
@@ -30,7 +32,8 @@ end);
 InstallMethod(OrbitalGraphs, "for a permutation group and a homogeneous list",
 [IsPermGroup, IsHomogeneousList],
 function(G, points)
-    local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes, D,
+    local orb, orbitsG, iorb, graph, graphlist, val, p, i, orbsizes, D, cutoff,
+          biggestOrbit, shouldSkipOneLargeOrbit, allowLoopyGraphs, search,
           orbpos, innerorblist, orbitsizes, orbreps, fillRepElts, maxval, moved;
 
     if IsEmpty(points) then
@@ -47,6 +50,15 @@ function(G, points)
                       "by the first argument <G>");
     fi;
     moved := Intersection(points, MovedPoints(G));
+
+    # Optimisation from BacktrackKit
+    # Warning: in the future, if we wish to allow supporting orbital graphs
+    # with loops, and choosing base points that are allowed to be fixed, then
+    # this would mean that a trivial group could have some orbital graphs to
+    # return, and so this optimisation would be invalid.
+    if IsTrivial(G) then
+        return [];
+    fi;
 
     fillRepElts := function(G, orb)
         local val, g, reps, buildorb, gens;
@@ -65,14 +77,41 @@ function(G, points)
         return reps;
     end;
 
-    orbitsG := Orbits(G, moved);
+    # Option `cutoff`:
+    # Have a limit for the number of edges that an orbital graph that this
+    # function will create. The default is infinity.
+    if IsPosInt(ValueOption("cutoff")) then
+        cutoff := ValueOption("cutoff");
+    else
+        cutoff := infinity;
+    fi;
 
-    # FIXME: Currently unused
-    orbsizes := [];
-    # FIXME: Currently unused
-    orbpos := [];
+    # TODO: Implement this
+    # Option `loops`:
+    # Create OrbitalGraphs with base pair is a loop (i.e. a repeated vertex).
+    # People do not normally want these kinds of orbital graphs, since they
+    # only tell you about the orbit of that point.
+    #allowLoopyGraphs := ValueOption("loops") = true;
+
+    # Option `search`:
+    # If `true`, then OrbitalGraphs will not create some orbital graphs
+    # that are useless from the point of view of a backtrack search algorithm.
+    search := ValueOption("search") = true;
+
+    # Option `skipone`
+    # If `true`, then OrbitalGraphs will not create one of the orbital graphs
+    # that has the largest possible number of edges. In a backtrack search,
+    # one such orbital graph can be ignored without losing anything.
+    shouldSkipOneLargeOrbit := search or ValueOption("skipone") = true;
+
+    # Make sure that the orbits of G are stably sorted, so that the resulting
+    # list of orbital graphs for a group always comes in the same order,
+    # with the same base pairs.
+    orbitsG := Set(Orbits(G, moved), Set);
 
     # Efficently store size of orbits of values
+    orbsizes := [];
+    orbpos := [];
     for orb in [1 .. Length(orbitsG)] do
         for i in orbitsG[orb] do
             orbsizes[i] := Length(orbitsG[orb]);
@@ -80,34 +119,59 @@ function(G, points)
         od;
     od;
 
-    innerorblist := List(orbitsG, o -> Orbits(Stabilizer(G, o[1]), moved));
-    # FIXME: Currently unused
+    # FIXME: In the following line, BacktrackKit uses [1..LargestMovedPoint(G)]
+    # instead of moved (which omits non-moved points). Is this a problem?
+    innerorblist := List(orbitsG, o -> Set(Orbits(Stabilizer(G, o[1]), moved), Set));
     orbitsizes := List([1 .. Length(orbitsG)],
                        x -> List(innerorblist[x], y -> Length(orbitsG[x]) * Length(y)));
+    biggestOrbit := Maximum(List(orbitsizes, Maximum));
 
     graphlist := [];
     for i in [1 .. Length(orbitsG)] do
         orb := orbitsG[i];
         orbreps := [];
-
         for iorb in innerorblist[i] do
-            if not (Size(iorb) = 1 and orb[1] = iorb[1]) # No loopy orbitals
-            then
-                graph := List([1..maxval], x -> []);
-                if IsEmpty(orbreps) then
-                    orbreps := fillRepElts(G, orb);
-                fi;
-                for val in orb do
-                    p := orbreps[val];
-                    graph[val] := List(iorb, x -> x^p);
-                od;
-                D := Digraph(graph);
-                SetUnderlyingGroup(D, G);
-                AddSet(graphlist, D);
+            # Find reasons to not construct this orbital graph...
+            # (These conditions are split to allow for future Info statements
+            # explaining what is happening, and also to make sure we have
+            # good code coverage, and therefore that we have good tests.)
+            if Size(orb) * Size(iorb) > cutoff then
+                # orbital graph is too big
+                continue;
+            elif search and orbpos[orb[1]] = orbpos[iorb[1]] and Size(iorb) + 1 = orbsizes[iorb[1]] then
+                # orbit size only removed one point
+                # TODO: Is this only relevant to 2-or-more-transitive groups, in which case there is just a unique orbital graph?
+                continue;
+            elif Length(iorb) = 1 and orb[1] = iorb[1] then
+                # don't want to take the fixed point orbit
+                continue;
+            elif search and Size(iorb) = orbsizes[iorb[1]] then
+                # orbit size unchanged
+                # TODO: Give an explanation of what this means
+                continue;
+            elif shouldSkipOneLargeOrbit and Size(orb) * Size(iorb) = biggestOrbit then
+                # FIXME: Is it safe putting this here, not as the first check?
+                # largest possible; skip
+                shouldSkipOneLargeOrbit := false;
+                continue;
             fi;
+
+            # Construct the orbital graph as a Digraphs package object
+            if IsEmpty(orbreps) then
+                orbreps := fillRepElts(G, orb);
+            fi;
+            graph := List([1 .. maxval], x -> []);
+            for val in orb do
+                p := orbreps[val];
+                graph[val] := List(iorb, x -> x ^ p);
+            od;
+            D := Digraph(graph);
+            SetFilterObj(D, IsOrbitalGraphOfGroup);
+            SetUnderlyingGroup(D, G);
+            Add(graphlist, D);
         od;
     od;
-    Perform(graphlist, function(x) SetFilterObj(x, IsOrbitalGraphOfGroup); end);
+    # Note: `graphlist` should already be stably ordered because of the uses of `Set`
     return graphlist;
 end);
 
