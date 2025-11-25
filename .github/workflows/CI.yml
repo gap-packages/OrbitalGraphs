@@ -39,7 +39,7 @@ jobs:
             pkgs-to-clone: "digraphs/digraphs"
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gap-actions/setup-gap@v2
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gap-actions/setup-gap@v2
         with:
           GAP_PKGS_TO_BUILD: ""
