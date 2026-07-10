@@ -19,39 +19,39 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: GAP ${{ matrix.gap-branch }} ${{ matrix.name }}
+    name: GAP ${{ matrix.gap-version }} ${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        gap-branch:
-          - master
-          - stable-4.16
-          - stable-4.15
-          - stable-4.14
-          - stable-4.13
-          - stable-4.12
-          - stable-4.11
+        gap-version:
+          - 'devel'   # current GAP development version from git
+          - 'latest'  # latest GAP release
+          - 'minimal' # oldest GAP release supported by this package
         pkgs-to-clone:
           - ""
         include:
           - name: "/ Digraphs master"
-            gap-branch: master
+            gap-version: devel
             pkgs-to-clone: "digraphs/digraphs"
 
     steps:
       - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v2
+      - uses: gap-actions/setup-gap@v3
         with:
-          GAPBRANCH: ${{ matrix.gap-branch }}
-          GAP_PKGS_TO_CLONE: ${{ matrix.pkgs-to-clone }}
-          GAP_PKGS_TO_BUILD: "io profiling orb digraphs grape datastructures"
-      - uses: gap-actions/build-pkg@v1
-      - uses: gap-actions/run-pkg-tests@v3
-      - uses: gap-actions/run-pkg-tests@v3
+          gap-version: ${{ matrix.gap-version }}
+      - uses: gap-actions/install-pkg@v1
+        if: ${{ matrix.pkgs-to-clone != '' }}
         with:
-          only-needed: true
-      - uses: gap-actions/process-coverage@v2
+          packages: ${{ matrix.pkgs-to-clone }}
+      - uses: gap-actions/build-pkg@v3
+        with:
+          extra-pkgs: "io profiling orb digraphs grape datastructures"
+      - uses: gap-actions/run-pkg-tests@v4
+      - uses: gap-actions/run-pkg-tests@v4
+        with:
+          mode: onlyneeded
+      - uses: gap-actions/process-coverage@v3
       - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -63,10 +63,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v2
-        with:
-          GAP_PKGS_TO_BUILD: ""
-      - uses: gap-actions/build-pkg-docs@v1
+      - uses: gap-actions/setup-gap@v3
+      - uses: gap-actions/build-pkg-docs@v2
         with:
           use-latex: "true"
       - name: "Upload documentation"
