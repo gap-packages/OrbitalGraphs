@@ -53,26 +53,3 @@ jobs:
       - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-  # The documentation job
-  manual:
-    name: Build manuals
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v3
-      - uses: gap-actions/build-pkg-docs@v2
-        with:
-          use-latex: "true"
-      - name: "Upload documentation"
-        uses: actions/upload-artifact@v4
-        with:
-          name: "OrbitalGraphs manual"
-          retention-days: 7
-          path: |
-            doc/manual.pdf
-            doc/*.html
-            doc/*.css
-            doc/*.js
-          if-no-files-found: error
