@@ -45,8 +45,6 @@ jobs:
         with:
           packages: ${{ matrix.pkgs-to-clone }}
       - uses: gap-actions/build-pkg@v3
-        with:
-          extra-pkgs: "io profiling orb digraphs grape datastructures"
       - uses: gap-actions/run-pkg-tests@v4
       - uses: gap-actions/run-pkg-tests@v4
         with:
