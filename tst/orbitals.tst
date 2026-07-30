@@ -27,9 +27,9 @@ gap> Length(orbitals);
 gap> ForAll(orbitals, D -> IsDigraph(D) and DigraphNrVertices(D) = 114);
 true
 gap> List(orbitals, DigraphNrEdges);
-[ 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 
-  8, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 
-  100, 100, 200, 200, 200, 200, 2450, 2450, 2500, 2500 ]
+[ 2450, 100, 100, 2500, 100, 100, 200, 100, 2, 4, 100, 4, 4, 8, 100, 4, 2, 
+  100, 4, 4, 8, 2500, 100, 100, 2450, 100, 100, 200, 100, 4, 4, 100, 2, 4, 8, 
+  100, 4, 4, 100, 4, 2, 8, 200, 8, 8, 200, 8, 8, 8, 4 ]
 gap> Number(orbitals, IsSymmetricDigraph);
 8
 gap> Set(orbitals, x -> Minimum(DigraphEdges(x)));
@@ -105,6 +105,29 @@ gap> DigraphEdges(x);
 gap> OrbitalGraphs(G) =
 >   List(OrbitalGraphs(G),
 >        x -> OrbitalGraph(G, BasePair(x), LargestMovedPoint(G)));
+true
+
+# OrbitalGraphs: `skipone` option
+gap> IsEmpty(OrbitalGraphs(SymmetricGroup(5) : skipone));
+true
+gap> Length(OrbitalGraphs(Group((1,2,3,4))));
+3
+gap> Length(OrbitalGraphs(Group((1,2,3,4)) : skipone));
+2
+
+# OrbitalGraphs: `cutoff` option
+gap> Length(OrbitalGraphs(DihedralGroup(IsPermGroup, 8)));
+2
+gap> Length(OrbitalGraphs(DihedralGroup(IsPermGroup, 8) : cutoff := 4));
+1
+
+# OrbitalGraphs: `search` option
+gap> IsEmpty(OrbitalGraphs(PSL(2, 5) : search));
+true
+gap> G := Group([ (1,4)(2,3), (2,3)(5,6) ]);;
+gap> Length(OrbitalGraphs(G, 6));
+9
+gap> IsEmpty(OrbitalGraphs(G, 6 : search));
 true
 
 #

@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "OrbitalGraphs",
 Subtitle := "Computations with orbital graphs in GAP",
-Version := "0.1.2",
+Version := "0.2.0",
 Date := "01/02/2022", # dd/mm/yyyy format
 License := "MPL-2.0",
 
