@@ -27,6 +27,28 @@ end);
 #     * a version one that only gives a representative in the isomorphism class
 #     * a version that gives the ones actually used in backtrack?
 #
+InstallMethod(OrbitalGraphs,
+"for a permutation group and a homogeneous list (super basic)",
+[IsPermGroup, IsHomogeneousList],
+function(G, points)
+  local graphs, stab, innerorbits, orb, iorb;
+
+  # Commented out lines give the behaviour of the original OrbitalGraphs method
+
+  graphs := [];
+  for orb in Orbits(G, points) do
+    stab := Stabilizer(G, orb[1]);
+    innerorbits := Orbits(stab, MovedPoints(stab));
+    #innerorbits := Orbits(stab, Difference(points, [orb[1]]));
+    for iorb in innerorbits do
+      AddSet(graphs, EdgeOrbitsDigraph(G, [orb[1], iorb[1]]));
+    od;
+  od;
+  return graphs;
+end);
+
+# TODO decide what to do about non-moved points
+
 InstallMethod(OrbitalGraphs, "for a permutation group and a homogeneous list",
 [IsPermGroup, IsHomogeneousList],
 function(G, points)
@@ -109,6 +131,55 @@ function(G, points)
     od;
     Perform(graphlist, function(x) SetFilterObj(x, IsOrbitalGraphOfGroup); end);
     return graphlist;
+end);
+
+InstallMethod(OrbitalGraphs,
+"for a permutation group an a homogeneous list (no stab chain)",
+[IsPermGroup, IsHomogeneousList],
+-1, # TEMPORARY so that it doesn't get called
+function(G, points)
+  local n, gens, seen, reps, graphs, root, D, orbit, schreier_gens, b, schreier_gen, innerorbits, a, i, inner;
+
+  # FIXME: Currently ignores points
+
+  n := LargestMovedPoint(G);
+  gens := GeneratorsOfGroup(G);
+  seen := BlistList([1 .. n], []);
+  reps := [];
+  graphs := [];
+
+  repeat
+    root := First([1 .. n], x -> not seen[x]);
+    seen[root] := true;
+    reps[root] := ();
+    orbit := [root];
+    schreier_gens := [];
+
+    # Construct a basic Schreier tree for <root> and Schreier generators for stabiliser of <root>
+    for a in orbit do
+      for i in [1 .. Length(gens)] do
+        b := a ^ gens[i];
+        if not seen[b] then
+          reps[b] := reps[a] * gens[i];
+          seen[b] := true;
+          Add(orbit, b);
+        else
+          schreier_gen := reps[a] * gens[i] * reps[b] ^ -1;
+          Add(schreier_gens, schreier_gen);
+        fi;
+      od;
+    od;
+
+    # Compute the orbits of the stabilizer of <root>, and hence the orbital graphs
+    if not IsTrivial(orbit) then
+      innerorbits := Orbits(Group(schreier_gens));
+      for inner in innerorbits do
+        AddSet(graphs, EdgeOrbitsDigraph(G, [orbit[1], inner[1]]));
+      od;
+    fi;
+
+  until SizeBlist(seen) = n;
+  return graphs;
 end);
 
 
